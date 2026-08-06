@@ -6,6 +6,32 @@ Full page builds for vpm.org — one folder per page. This repo is the sibling o
 [`vpm-widgets`](https://github.com/mhdesigns98/vpm-widgets) (`~/Projects/vpm/vpm-widgets/`),
 which holds reusable blocks.
 
+## ⚠️ This repo is PUBLIC
+
+Everything committed here is world-readable and indexable. That's a deliberate choice — the page
+markup ships to vpm.org anyway, so it isn't secret — but page folders accumulate *internal*
+documentation in a way widget folders never did, and that's the thing to watch.
+
+**Before committing, check what you're adding.** Reviewed and accepted as of 2026-08-06:
+
+- `voter-guide-2026/DEV-REQUEST.md` — an unsent draft to the `wpp-base` theme vendor, including
+  internal deadlines
+- `voter-guide-2026/AUDIT.md` — QA findings, including one unfixed contrast failure
+- The staging host `vpmnews.kinsta.cloud` and dev page id `466103`, in several files
+- `voter-guide-2026/.vercel/project.json` — `orgId` / `projectId`
+
+Those are known and judged acceptable. **Do not add worse.** Specifically, never commit:
+
+- API keys, tokens, or credentials of any kind — including in a `reference/` example. Use
+  `YOUR_KEY`-style placeholders, as `reference/wordpress-php-template/inc/voter-guide-data.php`
+  already does for the AP elections API.
+- Embargoed editorial content, unpublished results, or anything under a publication date
+- Named individuals' contact details, or verbatim internal email threads
+- Anything a `/brief` or `/ship-page` run produced that reads as criticism of a colleague or vendor
+
+If a page genuinely needs sensitive material to be useful, keep that file outside the repo and
+reference it by path from the page `README.md` — don't commit it and don't paraphrase it.
+
 ## Which repo does this belong in?
 
 > **A widget is used on more than one page. A page build is used on exactly one.**
