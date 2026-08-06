@@ -5,12 +5,19 @@ of these may already be solved and just need pointing at.
 
 ---
 
+**Subject:** Voter Guide page — four theme questions (needed before mid-September)
+
 Hi —
 
 I'm building out the VPM News Voter Guide page on the dev site
 (`/vpm-news-voter-guide/`, page id 466103). It's assembled from `block-html` layouts in the
 Section Builder template and is largely working. Four questions before I go further, mostly
 to avoid asking you to build something that already exists.
+
+Timing: we're aiming to have this live before early voting opens, so mid-September is the
+date I'm working back from. Only #1 and #2 could affect that — #3 and #4 are whenever you
+have a moment. If #1 turns out to need dev work on your side, I'd like to know sooner rather
+than later so I can plan around your lead time.
 
 **1. Custom CSS — is there already a way for me to update it myself?**
 
