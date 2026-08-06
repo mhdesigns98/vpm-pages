@@ -5,7 +5,7 @@ The 2025 Impact Report page on vpm.org, as deployed: hero, sticky jump-links nav
 not a single embed — same shape as `basics-virginia/`.
 
 - **Live (staging):** https://vpmnews.kinsta.cloud/understanding-impact-of-vpm/
-- **Preview:** https://mhdesigns98.github.io/vpm-widgets/widgets/impact-report-2025/preview.html
+- **Preview:** https://mhdesigns98.github.io/vpm-pages/pages/impact-report-2025/preview.html
 - **Predecessor:** `annual-report-2025/` — the earlier single-file build of the same report.
 
 ## Files
