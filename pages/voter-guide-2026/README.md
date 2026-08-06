@@ -1,3 +1,15 @@
+> **Migrated into `vpm-pages` on 2026-08-06.** Previously its own repo at
+> `~/Projects/vpm/vpm-voter-guide-2026`, now archived at
+> `~/Projects/archive/vpm-voter-guide-2026`.
+>
+> **Deploying:** this is a Vercel CLI-deployed project (not git-connected). The `.vercel/`
+> link is tracked in git and came along with the move, so `vercel` run from **this
+> directory** deploys to the same `vpm-voter-guide` project. Don't run it from the repo root.
+>
+> Two branches on `origin` preserve pre-migration state:
+> `wip/voter-guide-video-section` (in-progress video section, unreviewed) and
+> `archive/voter-guide-pre-migration`.
+
 # VPM News Voter Guide 2026
 
 Consolidation of the two previously separate projects (`vpm-voter-guide` and
