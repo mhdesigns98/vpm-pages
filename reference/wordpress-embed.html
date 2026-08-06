@@ -428,6 +428,7 @@
     background-image:linear-gradient(90deg, rgb(40,40,40) 0%, rgb(40,40,40) 100%);
     position:relative;
   }
+  .vpm-vg .vg-video-player iframe {position:absolute;inset:0;width:100%;height:100%;border:0;display:block;}
   .vpm-vg .vg-video-player img.vg-unavailable-icon {width:64px;height:64px;opacity:0.9;}
   .vpm-vg .vg-video-player .vg-msg {color:#eee;font-size:20px;text-align:center;}
   .vpm-vg .vg-video-player .vg-yt-icon {position:absolute;bottom:12px;right:12px;width:44px;height:44px;opacity:0.7;}
@@ -453,6 +454,16 @@
     color:var(--grey-53);
     margin-bottom:12px;
   }
+  .vpm-vg .vg-shorts-player {
+    position:relative;
+    aspect-ratio:9/16;
+    max-width:280px;
+    margin:0 auto;
+    background:#000;
+    border-radius:2px;
+    overflow:hidden;
+  }
+  .vpm-vg .vg-shorts-player iframe {position:absolute;inset:0;width:100%;height:100%;border:0;display:block;}
   .vpm-vg .vg-short-item {
     display:flex;
     gap:12px;
@@ -1046,9 +1057,10 @@
     <div class="vg-video-grid">
       <div>
         <div class="vg-video-player">
-          <img class="vg-unavailable-icon" src="https://vpm-voter-guide.vercel.app/assets/icon-video-unavailable.svg" alt="">
-          <p class="vg-msg">This video is unavailable</p>
-          <img class="vg-yt-icon" src="https://vpm-voter-guide.vercel.app/assets/icon-youtube-link.svg" alt="Visit YouTube">
+          <iframe src="https://www.youtube.com/embed/videoseries?list=PLDpD9qYyo0hIRsLNnOuzjot8VxVIp4rKb"
+            title="VPM election coverage playlist" loading="lazy" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
         <div class="vg-video-meta">
           <p class="vg-kicker vg-k-red">Featured</p>
@@ -1060,36 +1072,12 @@
       <div>
         <p class="vg-shorts-label">Shorts</p>
 
-        <a class="vg-short-item" href="#">
-          <div class="vg-short-thumb">
-            <img src="https://vpm-voter-guide.vercel.app/assets/photo-short-ballot.jpg" alt="">
-            <div class="vg-play-overlay"><img src="https://vpm-voter-guide.vercel.app/assets/icon-play-overlay.svg" alt=""></div>
-          </div>
-          <div>
-            <p class="vg-short-title">How to read your Virginia ballot</p>
-            <p class="vg-short-sub">YouTube Short</p>
-          </div>
-        </a>
-        <a class="vg-short-item" href="#">
-          <div class="vg-short-thumb">
-            <img src="https://vpm-voter-guide.vercel.app/assets/photo-short-senate.jpg" alt="">
-            <div class="vg-play-overlay"><img src="https://vpm-voter-guide.vercel.app/assets/icon-play-overlay.svg" alt=""></div>
-          </div>
-          <div>
-            <p class="vg-short-title">Meet the candidates: VA Senate</p>
-            <p class="vg-short-sub">YouTube Short</p>
-          </div>
-        </a>
-        <a class="vg-short-item" href="#">
-          <div class="vg-short-thumb">
-            <img src="https://vpm-voter-guide.vercel.app/assets/photo-short-earlyvoting.jpg" alt="">
-            <div class="vg-play-overlay"><img src="https://vpm-voter-guide.vercel.app/assets/icon-play-overlay.svg" alt=""></div>
-          </div>
-          <div>
-            <p class="vg-short-title">Early voting — what you need to know</p>
-            <p class="vg-short-sub">YouTube Short</p>
-          </div>
-        </a>
+        <div class="vg-shorts-player">
+          <iframe src="https://www.youtube.com/embed/videoseries?list=PLDpD9qYyo0hIW0XlDJSaEJsp2D3jt062J"
+            title="VPM election Shorts playlist" loading="lazy" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
       </div>
     </div>
 

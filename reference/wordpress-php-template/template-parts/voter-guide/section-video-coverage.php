@@ -1,6 +1,16 @@
 <?php
 /**
  * VPM Video Coverage — featured embed + shorts list.
+ *
+ * The live mockup (sections/video-coverage.html) now embeds two YouTube
+ * *playlists* rather than individual videos:
+ *   featured : https://www.youtube.com/playlist?list=PLDpD9qYyo0hIRsLNnOuzjot8VxVIp4rKb
+ *   shorts   : https://www.youtube.com/playlist?list=PLDpD9qYyo0hIW0XlDJSaEJsp2D3jt062J
+ * `featured_video_url` already accepts a playlist URL as-is via wp_oembed_get().
+ * The shorts column below still renders the ACF `shorts` repeater as a list of
+ * per-video embeds. To match the mockup it would instead take a single
+ * `shorts_playlist_url` field rendered in one 9:16 frame — that's an ACF field
+ * group change, not made here.
  */
 
 $featured_url     = get_sub_field( 'featured_video_url' );
