@@ -1,12 +1,15 @@
 # Un-Wine'd — Episode + Sponsors
 
 The upper section of the Un-Wine'd page: "Stream more" lockup, in-page jump links, the PBS
-viral player, the episode write-up, and the sponsor row. Companion to
-[`links-with-map`](../links-with-map/), which sits directly below it on the same page.
+viral player, the episode write-up, and the sponsor row.
 
-It lives in its own folder rather than inside `links-with-map/` because the harness loads
-exactly one `html.html` + `css.css` per folder — sharing a folder would make one of the two
-blocks untestable, which is the opposite of the point.
+**Uses widget:** `links-with-map` (vpm-widgets) — sits directly below this block on the same page.
+This page supplies the anchor targets its jump links point at; see *Page assembly* below.
+
+That widget lives in the sibling repo (`~/Projects/vpm/vpm-widgets/widgets/links-with-map/`) because
+it's reusable — the wineries directory is only its first instance. This page carries its own copy of
+the markup, per the no-cross-repo-references rule in `../../CLAUDE.md`. If `links-with-map` changes
+upstream, refresh the copy here.
 
 ## Per-episode changes
 
@@ -31,8 +34,13 @@ If you'd rather paste one stylesheet for the whole page instead of one per block
 concatenation, not hand-maintained — regenerate it after editing either block:
 
 ```bash
-cd widgets && { cat unwined-episode/css.css; echo; cat links-with-map/css.css; } > unwined-episode/unwined-page.css
+{ cat ~/Projects/vpm/vpm-pages/pages/unwined-episode/css.css; echo; \
+  cat ~/Projects/vpm/vpm-widgets/widgets/links-with-map/css.css; } \
+  > ~/Projects/vpm/vpm-pages/pages/unwined-episode/unwined-page.css
 ```
+
+Note this reads across both repos — it's a local regeneration step, not a build dependency. The
+committed `unwined-page.css` is the artifact; nothing at runtime reaches into `vpm-widgets`.
 
 ## Page assembly — the jump-link anchors
 
