@@ -29,14 +29,15 @@ I don't want to hand you compiled output if you have a build step.
 I did notice the theme inlines its CSS rather than linking it, so if an external stylesheet
 cuts against your performance approach, a per-page CSS field would work just as well for me.
 
-**2. Is there an article-list layout for the Section Builder?**
+**2. How configurable is the `page-article-grid` layout?**
 
-The page needs a section that pulls recent election coverage automatically rather than being
-hand-updated. Does the Section Builder flexible-content field already include an article-list
-or story-grid layout? If you could send the ACF field group export, or just a screenshot of
-the available layouts, I can tell whether what I need is already there.
+I'm already using the article grid layout on the page (it renders as
+`page-section page-article-grid cols-3`) and it's pulling stories correctly, so this is a
+question about its options rather than a request to build anything.
 
-If it isn't, the ask would be a layout with fields for category, post type, and post count.
+What can it be filtered by — category, post type, tag, post count? I need it scoped to
+elections coverage specifically. If there are fields for that I've missed in the editor, just
+point me at them. A copy of the ACF field group export would also answer it.
 
 **3. Which post types should an election coverage feed include?**
 
@@ -67,8 +68,10 @@ Mark
   Builder already does this job, and submitting a competing template to the team that owns the
   theme is a slow request with low odds.
 
-**If #2 comes back "no":** v1 ships with a curated static link list in a `block-html` layout,
-hand-updated. Not ideal, but it doesn't block the deadline on a vendor response.
+**#2 was largely answered by the audit** — the `page-article-grid cols-3` layout already exists
+and is already live on the page rendering six real stories. The remaining question is only
+whether it can be filtered to elections coverage. If it can't, v1 ships with the grid unfiltered
+or a curated static list, so this doesn't block the deadline either way.
 
 **Verified facts behind these questions** (from the public dev site, 2026-08-06): WordPress
 7.0.2, theme `wpp-base`, no child theme, classic ACF-driven with zero Gutenberg, Section
