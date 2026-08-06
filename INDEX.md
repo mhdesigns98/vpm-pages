@@ -16,4 +16,4 @@ Reusable blocks live in the sibling repo: `~/Projects/vpm/vpm-widgets/INDEX.md`.
 | `how-federal-funding-works/` | single-file | Federal funding explainer section for the impact page |
 | `impact-report-2025/` | split-file | 2025 Impact Report page as deployed — hero, sticky jump links, awards counters; consolidated page stylesheet + deferred behavior script (namespaces `vpm-impact25-`, `vpm-awards2025`). Two HTML fields, see its README for paste order |
 | `unwined-episode/` | split-file | Un-Wine'd page upper section — "Stream more" lockup, jump links, PBS viral player, episode write-up, sponsor row. **Uses widget:** `links-with-map` pasted directly below it |
-| `voter-guide-2026/` | *(pending migration)* | 2026 Voter Guide — seven sections pasted separately, see `PASTE-ORDER.md`. Still at `~/Projects/vpm/vpm-voter-guide-2026` pending an uncommitted worktree being resolved |
+| `voter-guide-2026/` | sections | 2026 Voter Guide — seven sections pasted separately into the WordPress editor; **read `sections/PASTE-ORDER.md` before pasting**. Reference implementation of the `sections/` shape. Carries `BRIEF.md`, `AUDIT.md`, and `DEV-REQUEST.md` |
