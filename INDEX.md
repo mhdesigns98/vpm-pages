@@ -15,5 +15,6 @@ Reusable blocks live in the sibling repo: `~/Projects/vpm/vpm-widgets/INDEX.md`.
 | `elections-2026-primary/` | split-file | 2026 Virginia Primary page — dates, video carousel, article links (WordPress ACF) |
 | `how-federal-funding-works/` | single-file | Federal funding explainer section for the impact page |
 | `impact-report-2025/` | split-file | 2025 Impact Report page as deployed — hero, sticky jump links, awards counters; consolidated page stylesheet + deferred behavior script (namespaces `vpm-impact25-`, `vpm-awards2025`). Two HTML fields, see its README for paste order |
+| `racism-challenging-perceptions/` | split-file | *Racism: Challenging Perceptions* series page — intro, five season groups, 14 PBS viral players, Issuu toolkit, Airtable feedback form (namespace `vpm-rcp-`). Consolidates the 19 stacked ACF Rich Text sections on the live page into one Code Block |
 | `unwined-episode/` | split-file | Un-Wine'd page upper section — "Stream more" lockup, jump links, PBS viral player, episode write-up, sponsor row. **Uses widget:** `links-with-map` pasted directly below it |
 | `voter-guide-2026/` | sections | 2026 Voter Guide — seven sections pasted separately into the WordPress editor; **read `sections/PASTE-ORDER.md` before pasting**. Reference implementation of the `sections/` shape. Carries `BRIEF.md`, `AUDIT.md`, and `DEV-REQUEST.md` |

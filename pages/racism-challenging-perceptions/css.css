@@ -1,0 +1,236 @@
+/* ================================================================
+   Racism: Challenging Perceptions — CSS block
+   ACF field: CSS  (Code Block section)
+
+   Every rule is scoped under .vpm-rcp so hostile host CSS can't
+   reach in and nothing here leaks out. The old page declared bare
+   .video-container / .video-column / .pbs-viral-player-wrapper as
+   globals — that is what this replaces.
+
+   Type scale intentionally matches the theme's own rich-text scale
+   (17px body / 30px h2 / 24px h3). The source page's inline
+   1.6rem–3rem values were authored against a 10px root and render
+   ~60% oversized on wpp-base, whose root is 16px.
+
+   Tokens copied from ~/Projects/vpm/vpm-widgets/tokens.css — do not
+   link that file, this must survive as a standalone paste.
+   ================================================================ */
+
+.vpm-rcp {
+  /* Brand core */
+  --vpm-rcp-dark-blue: #003865;   /* PMS 2955 C */
+  --vpm-rcp-black:     #101820;   /* PMS Black 6 C */
+
+  /* Derived tints */
+  --vpm-rcp-link:       #0B4F85;  /* blue-600 — 8.5:1 on white, AA */
+  --vpm-rcp-link-hover: #002244;  /* blue-900 */
+  --vpm-rcp-surface:    #F8F9FA;  /* gray-050 */
+  --vpm-rcp-border:     #D1D3D4;  /* gray-300 */
+  --vpm-rcp-rule:       #E5E7E9;  /* gray-200 */
+  --vpm-rcp-muted:      #5A6470;  /* gray-600 — 6.0:1 on white, AA */
+
+  /* Type */
+  --vpm-rcp-font-body: 'Public Sans', 'Helvetica Neue', Arial, sans-serif;
+  --vpm-rcp-font-head: 'Oswald', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+
+  max-width: 1100px;
+  margin: 0 auto;
+  font-family: var(--vpm-rcp-font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--vpm-rcp-black);
+  text-align: left;
+}
+
+/* Scoped reset — the theme's base.css already does this, but a
+   pasted block must not depend on that. */
+.vpm-rcp *,
+.vpm-rcp *::before,
+.vpm-rcp *::after { box-sizing: border-box; }
+
+/* Element-level defaults deliberately carry NO font-size. Every size lives
+   on a .vpm-rcp .vpm-rcp-* selector below, so all of them share one
+   specificity (0-2-0) and source order decides — an element rule here would
+   outrank the single-class BEM rules and silently win. */
+.vpm-rcp p { margin: 0 0 1.1em; line-height: inherit; }
+.vpm-rcp p:last-child { margin-bottom: 0; }
+
+.vpm-rcp h2,
+.vpm-rcp h3 {
+  font-family: var(--vpm-rcp-font-head);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--vpm-rcp-dark-blue);
+}
+.vpm-rcp h2 { margin: 0 0 0.5em; }
+.vpm-rcp h3 { margin: 0 0 0.4em; }
+
+.vpm-rcp a {
+  color: var(--vpm-rcp-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.vpm-rcp a:hover,
+.vpm-rcp a:focus-visible { color: var(--vpm-rcp-link-hover); }
+.vpm-rcp a:focus-visible {
+  outline: 3px solid var(--vpm-rcp-dark-blue);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.vpm-rcp img { max-width: 100%; height: auto; display: block; }
+
+/* Own margin, not a whitespace text node — the parent link is inline-flex
+   (see the tap-target rule below) and flex containers drop whitespace nodes. */
+.vpm-rcp .vpm-rcp-meta { color: var(--vpm-rcp-muted); margin-left: 0.3em; }
+
+/* ── Intro ─────────────────────────────────────────────────────
+   Replaces the source's float + <br style="clear:both"> hack.
+   display: flow-root contains the floats without a clearing element. */
+.vpm-rcp-intro {
+  display: flow-root;
+  margin-bottom: 48px;
+}
+/* Two-class selectors: .vpm-rcp img above is 0-2-0, so a single class
+   here would lose its max-width to the blanket rule. */
+.vpm-rcp .vpm-rcp-intro__art {
+  float: left;
+  width: 600px;
+  max-width: 55%;
+  margin: 0 24px 20px 0;
+  border-radius: 6px;
+}
+.vpm-rcp .vpm-rcp-intro__portrait {
+  float: right;
+  width: 180px;
+  max-width: 35%;
+  margin: 4px 0 20px 24px;
+  border-radius: 6px;
+}
+
+/* ── Season groups ─────────────────────────────────────────── */
+.vpm-rcp-season {
+  margin: 0 0 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--vpm-rcp-rule);
+}
+.vpm-rcp .vpm-rcp-season__title {
+  font-size: 34px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.vpm-rcp .vpm-rcp-season__link { font-size: 20px; }
+
+/* Season 5 is the current season — the tinted card the source
+   built with an inline border-radius/background <div>. */
+.vpm-rcp-season--featured {
+  padding: 28px;
+  border: 1px solid var(--vpm-rcp-border);
+  border-radius: 10px;
+  background: var(--vpm-rcp-surface);
+}
+
+/* ── Video grid ────────────────────────────────────────────── */
+.vpm-rcp-videos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px 28px;
+  margin: 24px 0 0;
+}
+.vpm-rcp-video { min-width: 0; }
+.vpm-rcp .vpm-rcp-video__title { font-size: 22px; margin-top: 14px; }
+.vpm-rcp .vpm-rcp-video__desc { font-size: 16px; }
+.vpm-rcp .vpm-rcp-video__links { font-weight: 600; }
+
+/* Standalone action links (discussion guides, season toolkit) sit in their own
+   paragraph, so WCAG 2.5.8's "link inside a sentence" exemption doesn't cover
+   them — give them a 44px target without changing the type size. */
+.vpm-rcp .vpm-rcp-video__links a,
+.vpm-rcp .vpm-rcp-season__link a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+/* PBS viral player: 16:9 plus 43px of player chrome. */
+.vpm-rcp-player {
+  position: relative;
+  padding-top: calc(56.25% + 43px);
+  background: var(--vpm-rcp-black);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.vpm-rcp-player iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ── Embeds (Issuu toolkit, Airtable form) ─────────────────── */
+.vpm-rcp .vpm-rcp-toolkit__title { font-size: 24px; margin-top: 40px; }
+
+.vpm-rcp-embed { width: 100%; }
+.vpm-rcp-embed iframe {
+  width: 100%;
+  border: 0;
+  background: transparent;
+}
+.vpm-rcp-embed--issuu {
+  position: relative;
+  padding-top: max(60%, 326px);
+  height: 0;
+}
+.vpm-rcp-embed--issuu iframe {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+.vpm-rcp-embed--form iframe {
+  height: 533px;
+  border: 1px solid var(--vpm-rcp-border);
+  border-radius: 6px;
+}
+
+/* ── Feedback ──────────────────────────────────────────────── */
+.vpm-rcp-feedback {
+  padding-top: 32px;
+  border-top: 1px solid var(--vpm-rcp-rule);
+}
+.vpm-rcp .vpm-rcp-feedback__title { font-size: 26px; }
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .vpm-rcp-videos { grid-template-columns: 1fr; gap: 28px; }
+}
+
+@media (max-width: 640px) {
+  .vpm-rcp { font-size: 16px; }
+  .vpm-rcp .vpm-rcp-season__title { font-size: 28px; }
+  .vpm-rcp .vpm-rcp-video__title,
+  .vpm-rcp .vpm-rcp-toolkit__title { font-size: 20px; }
+  .vpm-rcp .vpm-rcp-feedback__title { font-size: 24px; }
+  .vpm-rcp-season--featured { padding: 20px; }
+
+  /* Floats collapse to stacked images. */
+  .vpm-rcp .vpm-rcp-intro__art,
+  .vpm-rcp .vpm-rcp-intro__portrait {
+    float: none;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 20px;
+  }
+  .vpm-rcp .vpm-rcp-intro__portrait { max-width: 220px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vpm-rcp *,
+  .vpm-rcp *::before,
+  .vpm-rcp *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
