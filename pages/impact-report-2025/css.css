@@ -72,6 +72,17 @@
   --shadow:    0 10px 28px rgba(0, 56, 101, 0.12);
 }
 
+/* The seven jump-link targets are CMS-generated .page-section-header sections,
+   which carry no scroll-margin of their own. Offset every in-page jump so the
+   sticky .vpm-jump-links bar (top: 0, 61px tall as deployed) doesn't cover the heading you
+   just landed on. Set here on the scroll container rather than as a
+   scroll-margin-top on .page-section-header, so it needs no coupling to a host
+   CMS class name and covers any anchor added later. See README, "Page assembly
+   -- the jump-link anchors". */
+html {
+  scroll-padding-top: 96px;
+}
+
 /* -----------------------------------------------------------------------------
    2. Optional wrapper
    Layout/typography for pages that wrap the whole report in one
