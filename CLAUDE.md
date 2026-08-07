@@ -86,6 +86,45 @@ the filenames. `voter-guide-2026` is the reference implementation of that patter
 Do not convert an existing page from one shape to another as a side errand. If the CMS placement
 didn't change, the shape shouldn't either.
 
+## The WordPress host theme (`wpp-base`)
+
+Facts about the live theme, measured 2026-08-07 against `wpp-base` 1.3.91 on
+`vpmnews.kinsta.cloud`. They change what a page build has to supply, so check them before
+inventing a type scale or a defensive stylesheet.
+
+- **Root font-size is 16px.** Any `rem` in inherited or pasted markup resolves against that. Older
+  VPM markup was authored against a **10px** root, so `1.6rem` renders at 25.6px, not 16px — a
+  silent ~60% inflation. **Measure the computed `font-size` on the live page before converting
+  anything.** Do not infer intent from the number alone.
+- **A Code Block inherits no typography.** `.page-code-block-content` styles the section's
+  *description* field, not the HTML you paste. A pasted block must own its own type scale.
+  A Rich Text section is the opposite — `.page-rich-text-inner` supplies 17px body / 30px h2 /
+  24px h3 / Oswald headings. Match that scale when converting a Rich Text section to a Code Block,
+  or the page will visibly change.
+- **Widths:** `.container` is `max-width: 1240px; padding: 0 20px`. Rich Text width variants are
+  narrow 720 / medium 900 / **wide 1100** / full 100%. A Code Block replacing a `width-wide`
+  section should set its own `max-width: 1100px`.
+- **The Stream Player is `position: relative`, not fixed.** It scrolls away with the header. There
+  is no pinned bottom bar on this theme to collide with — the Pre-Ship Checklist item below predates
+  the wpp-base migration. Re-verify before assuming either way; don't remove the item on one page's
+  evidence.
+- **The theme declares no `!important` on bare element selectors.** Every `!important` in
+  `base/components/overrides/page-builder.css` is scoped to a theme component class
+  (`.hero-grid`, `.page-team`, …) and cannot reach inside a namespaced block. This is why no page in
+  this repo needs defensive `!important` — and why a synthetic `p { font-size: 32px !important }`
+  test is the wrong check. See the scoping item in the checklist below.
+
+### CSS specificity trap in scoped blocks
+
+Inside a `.vpm-foo` wrapper, an element-level default like `.vpm-foo h2 { font-size: 30px }` is
+**0-2-0** and silently outranks the BEM rule `.vpm-foo-season__title { font-size: 34px }` at
+**0-1-0**. The BEM rule never applies and nothing errors.
+
+Keep element-level defaults free of any property a modifier will want to set — give them font-family,
+color and margin, but no `font-size` — and write every size rule as `.vpm-foo .vpm-foo-thing__x` so
+all of them share one specificity and source order decides. The same trap bites
+`.vpm-foo img { max-width: 100% }` against a single-class image rule.
+
 ## Design Tokens
 
 **`~/Projects/vpm/vpm-widgets/tokens.css` is canonical for both repos.** There is deliberately no
@@ -154,12 +193,17 @@ equivalent lives in `~/Projects/vpm/vpm-widgets/CLAUDE.md` and is a different li
 widget harness simulates *a block dropped into a hostile page*, which is not the situation a page
 build faces. Don't merge them.
 
-- [ ] Styles fully scoped — unaffected by hostile host CSS (`!important` links, global heading sizes)
+- [ ] Styles fully scoped — verified by loading the **real** `wpp-base` stylesheets
+      (`base`, `components`, `overrides`, `page-builder`, `archive`, `player`) over the block and
+      diffing computed styles: the correct result is zero deltas inside the namespace. Prefer this
+      to a synthetic `!important` injection, which no page here survives and which corresponds to
+      nothing the theme actually does (see the theme section above)
 - [ ] Every jump link resolves to an anchor that exists, including anchors supplied by a widget
       pasted below the page markup
 - [ ] Paste order documented and verified against the live page
 - [ ] Each consumed widget's copy matches current `vpm-widgets` source
-- [ ] No focus loss or overlap with the sticky Stream Player
+- [ ] No focus loss or overlap with the Stream Player — re-check whether it is actually pinned on
+      the host you're shipping to; on `wpp-base` 1.3.91 it is `position: relative` and this is n/a
 - [ ] Degrades gracefully in a 320px column
 - [ ] Keyboard accessible, visible focus, WCAG 2.1 AA contrast, `prefers-reduced-motion` respected
 - [ ] No console errors
