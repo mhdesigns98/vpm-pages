@@ -50,6 +50,13 @@ still has:
    real headlines. **Fixed** — all 6 cards now carry their real `href` and headline, pulled from
    `www.vpm.org/raised-razed`'s rendered DOM.
 
+4. **All 6 remaining team photos + the show logo pointed at Kinsta**, not just Randall's. Found
+   during `/ship-page`: Lorenzo, Jordy, Metta, Craig, Ivan, and the `raised-razed-show-logo.png`
+   were all still `vpmnews.kinsta.cloud/wp-content/uploads/...` URLs — the same unreliable staging
+   host that lost Randall's photo outright. They happened to still 200 at review time, but nothing
+   guarantees that host stays up. **Fixed** — all six now point at the stable `assets.vpm.org`
+   URLs the live page actually serves.
+
 Net effect: the original defect list in this README ("known issues — blocking") was diagnosing
 symptoms of a bad migration source, not real content gaps on the actual page. There is nothing
 outstanding from this list anymore.
@@ -68,8 +75,8 @@ changed.
 | 5 | `page-section-header` "Raised/Razed Articles" | `.vpm-rr-articles` heading | Square marker replicated as `.vpm-rr-section-title__marker` |
 | 6–11 | 6× linked press-article cards (image + headline + link) | `.vpm-rr-press-card` × 6 | Headlines/links/images pulled from the live page's rendered DOM — see "Kinsta vs. live" above for what the staging port had lost |
 | 12 | `page-rich-text` "The Team" `<h2>` | `.vpm-rr-team` heading | Stripped Brightspot `data-state` JSON attribute (CMS internal metadata, not content) |
-| 13–30 | `page-rich-text` × 18 — 6× (photo / name+role / bio) triplets + `<hr>` dividers | `.vpm-rr-member` × 6 | Collapsed each 3-section stack (photo, name/role, bio) plus its trailing `<hr>` into one `<article>`; dividers now `border-bottom` on all but the last member. Randall Taylor's photo restored from the live page (see above) |
-| 31 | `page-rich-text` — show logo image | `.vpm-rr-about__logo` | |
+| 13–30 | `page-rich-text` × 18 — 6× (photo / name+role / bio) triplets + `<hr>` dividers | `.vpm-rr-member` × 6 | Collapsed each 3-section stack (photo, name/role, bio) plus its trailing `<hr>` into one `<article>`; dividers now `border-bottom` on all but the last member. All 6 photos point at `assets.vpm.org`, not Kinsta (see above) |
+| 31 | `page-rich-text` — show logo image | `.vpm-rr-about__logo` | `assets.vpm.org`, not Kinsta (see above) |
 | 32 | `page-rich-text` "About" `<h2>` + 4 paragraphs | `.vpm-rr-about` body | Stripped Brightspot `data-state` JSON attribute |
 | 33 | `page-rich-text` — social follow links | `.vpm-rr-follow` | |
 
@@ -96,6 +103,17 @@ changed.
 None outstanding. All content gaps found during the first pass turned out to be artifacts of a
 stale/broken migration source (Kinsta), not real defects on the canonical live page — see
 "Kinsta vs. live" above.
+
+## Ship-page notes
+
+- **Scoping was verified against the real host stylesheets** (base/components/overrides/
+  page-builder/archive/player from `wpp-base`), per the method `~/Projects/vpm/vpm-pages/CLAUDE.md`
+  specifies — zero deltas across 11 selectors including `a`, `h2`, `img`, `p`. A synthetic
+  `a { color: red !important }` / `h2 { font-size: 48px !important }` injection *does* override
+  this page's styles, but that's expected and explicitly called out in `CLAUDE.md` as the wrong
+  check: `!important` beats any selector specificity by definition, the live theme itself declares
+  none on bare elements, and no page in this repo is written to survive a hypothetical one. Don't
+  re-flag this as a scoping failure on a future ship-page run.
 
 ## Uses widget
 
