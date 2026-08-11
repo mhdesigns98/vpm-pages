@@ -1,6 +1,9 @@
 # Raised/Razed
 
-**Live URL:** https://vpmnews.kinsta.cloud/raised-razed/
+**Live URL:** https://www.vpm.org/raised-razed (canonical source of truth)
+**Also seen at:** https://vpmnews.kinsta.cloud/raised-razed/ — a WordPress migration/staging port
+of this page that is **missing content** present on the live `vpm.org` original (see "Kinsta vs.
+live" below). Built against the live page after that was discovered.
 **Shape:** `acf-split` (Code Block — HTML + CSS fields)
 **Namespace:** `vpm-rr-`
 
@@ -23,9 +26,38 @@ page into one namespaced Code Block, following the same pattern used for
 
 Paste order: `html.html` → HTML field, `css.css` → CSS field. No JS field needed.
 
+## Kinsta vs. live — what the WordPress port lost
+
+The initial pass at this consolidation was built against `vpmnews.kinsta.cloud`, assuming it was
+the current/canonical page. It is not — it's a WordPress migration port of the older Brightspot
+page, and the port dropped or broke content that the actual live page at `www.vpm.org/raised-razed`
+still has:
+
+1. **Randall R. Taylor Jr.'s headshot.** Kinsta's `src` was
+   `https://vpmnews.kinsta.cloud/wp-content/uploads/optimized/c13b8a4c-90.90` — a corrupted
+   filename (lost its real extension) that 404s. The live page serves a working image at
+   `https://k1-prod-vpm.s3.us-east-2.amazonaws.com/brightspot/6e/d6/b9e0b86f47b099b35950e88d08d5/randall.png`.
+   **Fixed** — this build now uses the working S3 URL.
+
+2. **A 6th press card, entirely missing from Kinsta.** "Local filmmakers highlight Black life in
+   Charlottesville's Vinegar Hill and the neighborhood's ultimate destruction by Urban Renewal"
+   (`https://www.vpm.org/2022-04-22/local-filmmakers-highlight-black-life-in-charlottesvilles-vinegar-hill-and-the`)
+   exists on the live page but nowhere on Kinsta. **Fixed** — added as the 6th card.
+
+3. **Every press card was missing its link on Kinsta**, and one (the appraisal-reports screenshot)
+   was missing its headline too — it looked image-only, which the first pass on this page
+   mistakenly treated as intentional. On the live page all 6 cards are real linked articles with
+   real headlines. **Fixed** — all 6 cards now carry their real `href` and headline, pulled from
+   `www.vpm.org/raised-razed`'s rendered DOM.
+
+Net effect: the original defect list in this README ("known issues — blocking") was diagnosing
+symptoms of a bad migration source, not real content gaps on the actual page. There is nothing
+outstanding from this list anymore.
+
 ## Provenance table
 
-Every source section, where it landed, and what changed.
+Every source section (from the live `www.vpm.org/raised-razed` page), where it landed, and what
+changed.
 
 | # | Source section | Destination | Notes |
 |---|---|---|---|
@@ -34,13 +66,12 @@ Every source section, where it landed, and what changed.
 | 3 | `page-rich-text` — PBS viral player iframe | `.vpm-rr-player` | Added `loading="lazy"` + real `title` (source iframe had neither) |
 | 4 | `page-rich-text` — intro paragraph | `.vpm-rr-intro` body copy | |
 | 5 | `page-section-header` "Raised/Razed Articles" | `.vpm-rr-articles` heading | Square marker replicated as `.vpm-rr-section-title__marker` |
-| 6 | `page-split` — appraisal-reports image, **no headline/text** | `.vpm-rr-press-card--image-only` | Kept image-only per decision below — see Known issues |
-| 7–10 | `page-split` × 4 — image + `<h2>` headline | `.vpm-rr-press-card` × 4 | Theme-supplied `page-split-image`/`page-split-text` replaced with namespaced BEM; no source `<a>` existed on any of these, headline-only teasers carried as-is |
-| 11 | `page-rich-text` "The Team" `<h2>` | `.vpm-rr-team` heading | Stripped Brightspot `data-state` JSON attribute (CMS internal metadata, not content) |
-| 12–29 | `page-rich-text` × 18 — 6× (photo / name+role / bio) triplets + `<hr>` dividers | `.vpm-rr-member` × 6 | Collapsed each 3-section stack (photo, name/role, bio) plus its trailing `<hr>` into one `<article>`; dividers now `border-bottom` on all but the last member |
-| 30 | `page-rich-text` — show logo image | `.vpm-rr-about__logo` | |
-| 31 | `page-rich-text` "About" `<h2>` + 4 paragraphs | `.vpm-rr-about` body | Stripped Brightspot `data-state` JSON attribute |
-| 32 | `page-rich-text` — social follow links | `.vpm-rr-follow` | |
+| 6–11 | 6× linked press-article cards (image + headline + link) | `.vpm-rr-press-card` × 6 | Headlines/links/images pulled from the live page's rendered DOM — see "Kinsta vs. live" above for what the staging port had lost |
+| 12 | `page-rich-text` "The Team" `<h2>` | `.vpm-rr-team` heading | Stripped Brightspot `data-state` JSON attribute (CMS internal metadata, not content) |
+| 13–30 | `page-rich-text` × 18 — 6× (photo / name+role / bio) triplets + `<hr>` dividers | `.vpm-rr-member` × 6 | Collapsed each 3-section stack (photo, name/role, bio) plus its trailing `<hr>` into one `<article>`; dividers now `border-bottom` on all but the last member. Randall Taylor's photo restored from the live page (see above) |
+| 31 | `page-rich-text` — show logo image | `.vpm-rr-about__logo` | |
+| 32 | `page-rich-text` "About" `<h2>` + 4 paragraphs | `.vpm-rr-about` body | Stripped Brightspot `data-state` JSON attribute |
+| 33 | `page-rich-text` — social follow links | `.vpm-rr-follow` | |
 
 ## What changed and why
 
@@ -57,25 +88,14 @@ Every source section, where it landed, and what changed.
 - **Brightspot CMS metadata stripped** from two `<h2>` elements ("The Team", "About") that
   carried large inline `data-state` JSON blobs — internal publishing metadata, not content.
 - **Press grid restructured** from single-column stacked `page-split` sections into a responsive
-  CSS grid (`auto-fit`, min 240px) so all 5 items sit together instead of full-width rows.
+  CSS grid (`auto-fit`, min 240px), and every card is now a real link (`.vpm-rr-press-card__link`)
+  to its article — restoring behavior the Kinsta port had lost.
 
-## Known issues — blocking, need your input before shipping
+## Known issues
 
-1. **Randall R. Taylor Jr.'s headshot 404s on the live page right now.**
-   Source `src="https://vpmnews.kinsta.cloud/wp-content/uploads/optimized/c13b8a4c-90.90"` —
-   filename has lost its real extension (`.90` instead of `.jpg`/`.png`) and returns HTTP 404.
-   **Per your decision, this build ships a placeholder** (`.vpm-rr-member__photo--placeholder`,
-   shows "RT" initials) instead of a broken-image icon. **A real replacement photo is still
-   needed** — swap the placeholder markup for a real `<img>` once one is supplied.
-
-2. **One press card has no headline or link.** The 4th "Articles" item (appraisal-reports
-   screenshot) has always been image-only on the live page — no `<h2>`, no `<a>`, nothing in its
-   text panel. **Per your decision, this ships as-is** (`.vpm-rr-press-card--image-only`).
-
-3. **None of the 5 press cards link anywhere.** All five are headline-over-image with no `<a>`
-   wrapping either — this matches current live behavior exactly, but means the "Articles" section
-   has no functional links. Worth confirming with editorial whether that's intentional (teaser-only
-   design) or a missed migration step, independent of issue #2 above.
+None outstanding. All content gaps found during the first pass turned out to be artifacts of a
+stale/broken migration source (Kinsta), not real defects on the canonical live page — see
+"Kinsta vs. live" above.
 
 ## Uses widget
 
