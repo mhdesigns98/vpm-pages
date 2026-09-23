@@ -1,61 +1,73 @@
 <!--
   VPM Voter Guide — VPM Video Coverage Section (ACF)
+  Merged 2026-09-22: was two separate fragments/sections (Video Coverage +
+  Video Shorts) that read as duplicates on the page (near-identical titles,
+  both "watch VPM video" sections back to back). Now one section, one row:
+  the JW vertical-shorts carousel (left) sets the row height (clamped to
+  320-460px), and the YouTube playlist player (right, 16:9; title/byline
+  update live via the IFrame API, pulled from a previously-built
+  playlist-embed component) fills that same height, so the two always share
+  a top and bottom edge. The CTA row spans full width below both. Layout CSS
+  lives in the <style> below, not header-section.html, so re-pasting this
+  block alone can't break the pairing.
   Requires the shared styles from header-section.html (or
   _shared-styles.html) to be present elsewhere on the page.
 -->
+<style>
+  .vpm-vg .vg-vs-row {
+    display:grid;
+    grid-template-columns:minmax(0,2fr) minmax(0,3fr);
+    gap:24px;
+    margin-top:16px;
+  }
+  .vpm-vg .vg-vs-yt {
+    position:relative;
+    aspect-ratio:16/9;
+    min-height:320px;
+    max-height:460px;
+    background:#000;
+    border-radius:2px;
+    overflow:hidden;
+  }
+  .vpm-vg .vg-vs-yt iframe {
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:0;
+  }
+  /* JW sizes its cards once, at init, to (placement height - 24px), with 12px
+     padding above and below. The script below sets the placement to the
+     player's height + 24px before embed.js runs; the wrapper's -12px margins bleed that
+     padding out so card edges land exactly on the player's edges. */
+  .vpm-vg .vg-vs-jw {margin:-12px 0;}
+  .vpm-vg .vg-vs-jw [data-jw-placement-id] {height:405px;}
+  @media (max-width:980px){
+    .vpm-vg .vg-vs-row {grid-template-columns:1fr;}
+    .vpm-vg .vg-vs-yt {min-height:0;}
+    .vpm-vg .vg-vs-jw {margin:0;}
+    .vpm-vg .vg-vs-jw [data-jw-placement-id] {height:400px;}
+  }
+</style>
 <div class="vpm-vg">
   <section class="vg-block vg-alt" id="video">
     <div class="vg-wrap">
       <div class="vg-section-label"><span class="vg-accent"></span><h2 class="vg-section-title">VPM Video Coverage</h2></div>
-      <p class="vg-section-sub">Watch VPM's election reporting — full segments and short clips</p>
+      <p class="vg-section-sub">Watch VPM's election reporting</p>
 
-      <div class="vg-video-grid">
+      <div class="vg-vs-row">
+        <div class="vg-vs-jw">
+          <div id="publisher_div" data-jw-placement-id="4CIEdm4o"></div>
+        </div>
         <div>
-          <div class="vg-video-player">
-            <img class="vg-unavailable-icon" src="https://vpm-voter-guide.vercel.app/assets/icon-video-unavailable.svg" alt="">
-            <p class="vg-msg">This video is unavailable</p>
-            <img class="vg-yt-icon" src="https://vpm-voter-guide.vercel.app/assets/icon-youtube-link.svg" alt="Visit YouTube">
+          <div class="vg-vs-yt">
+            <div id="vg-yt-playlist-player" style="position:absolute;inset:0;width:100%;height:100%;"></div>
           </div>
           <div class="vg-video-meta">
-            <p class="vg-kicker vg-k-red">Featured</p>
-            <p class="vg-card-title">Election Night Special: Virginia Results with VPM News</p>
-            <p class="vg-byline">VPM News · Election Night 2026</p>
+            <p class="vg-kicker vg-k-red" id="vg-yt-status">Video</p>
+            <p class="vg-card-title" id="vg-yt-title">VPM News — Election Coverage Playlist</p>
+            <p class="vg-byline" id="vg-yt-byline">VPM News · 2026</p>
           </div>
-        </div>
-
-        <div>
-          <p class="vg-shorts-label">Shorts</p>
-
-          <a class="vg-short-item" href="#">
-            <div class="vg-short-thumb">
-              <img src="https://vpm-voter-guide.vercel.app/assets/photo-short-ballot.jpg" alt="">
-              <div class="vg-play-overlay"><img src="https://vpm-voter-guide.vercel.app/assets/icon-play-overlay.svg" alt=""></div>
-            </div>
-            <div>
-              <p class="vg-short-title">How to read your Virginia ballot</p>
-              <p class="vg-short-sub">YouTube Short</p>
-            </div>
-          </a>
-          <a class="vg-short-item" href="#">
-            <div class="vg-short-thumb">
-              <img src="https://vpm-voter-guide.vercel.app/assets/photo-short-senate.jpg" alt="">
-              <div class="vg-play-overlay"><img src="https://vpm-voter-guide.vercel.app/assets/icon-play-overlay.svg" alt=""></div>
-            </div>
-            <div>
-              <p class="vg-short-title">Meet the candidates: VA Senate</p>
-              <p class="vg-short-sub">YouTube Short</p>
-            </div>
-          </a>
-          <a class="vg-short-item" href="#">
-            <div class="vg-short-thumb">
-              <img src="https://vpm-voter-guide.vercel.app/assets/photo-short-earlyvoting.jpg" alt="">
-              <div class="vg-play-overlay"><img src="https://vpm-voter-guide.vercel.app/assets/icon-play-overlay.svg" alt=""></div>
-            </div>
-            <div>
-              <p class="vg-short-title">Early voting — what you need to know</p>
-              <p class="vg-short-sub">YouTube Short</p>
-            </div>
-          </a>
         </div>
       </div>
 
@@ -68,3 +80,68 @@
     </div>
   </section>
 </div>
+<script>
+(function () {
+  var PLAYLIST_ID = 'PLDpD9qYyo0hIRsLNnOuzjot8VxVIp4rKb';
+  var player;
+
+  var statusEl = document.getElementById('vg-yt-status');
+  var titleEl = document.getElementById('vg-yt-title');
+  var bylineEl = document.getElementById('vg-yt-byline');
+
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  var previousReady = window.onYouTubeIframeAPIReady;
+  window.onYouTubeIframeAPIReady = function () {
+    if (typeof previousReady === 'function') previousReady();
+    player = new YT.Player('vg-yt-playlist-player', {
+      height: '100%',
+      width: '100%',
+      playerVars: { listType: 'playlist', list: PLAYLIST_ID, rel: 0, modestbranding: 1 },
+      events: {
+        onReady: function () { updateVideoInfo(); positionJwPlacement(); },
+        onStateChange: function (e) {
+          if (e.data === YT.PlayerState.PLAYING || e.data === YT.PlayerState.CUED) updateVideoInfo();
+        }
+      }
+    });
+  };
+
+  function updateVideoInfo() {
+    if (!player) return;
+    try {
+      var videoUrl = player.getVideoUrl();
+      var videoId = new URL(videoUrl).searchParams.get('v');
+      if (!videoId) return;
+
+      fetch('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=' + videoId + '&format=json')
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          statusEl.textContent = 'Now Playing';
+          titleEl.textContent = data.title || 'VPM News — Election Coverage Playlist';
+          bylineEl.textContent = data.author_name ? data.author_name : 'VPM News · 2026';
+        })
+        .catch(function () {
+          statusEl.textContent = 'Now Playing';
+        });
+    } catch (err) {
+      statusEl.textContent = 'Now Playing';
+    }
+  }
+
+  // Must run before embed.js: JW reads the placement height once and never re-measures.
+  function positionJwPlacement() {
+    if (window.matchMedia('(max-width:980px)').matches) return;
+    var yt = document.querySelector('#video .vg-vs-yt');
+    var jw = document.getElementById('publisher_div');
+    if (!yt || !jw) return;
+    var h = Math.round(yt.getBoundingClientRect().height);
+    if (h > 0) jw.style.height = (h + 24) + 'px';
+  }
+  positionJwPlacement();
+})();
+</script>
+<script src="https://cdn.jwplayer.com/v2/sites/I7gSgtcs/placements/embed.js"></script>

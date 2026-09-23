@@ -9,14 +9,16 @@
     this Header section, paste the styles from
     acf-sections/_shared-styles.html instead, once, anywhere on that page.
   - The hero (h1 headline, dek, sidebar with Important Dates — no ad
-    placeholder here anymore, see note below).
-  - The "Featured Stories" label band, and then the fragment ENDS at a
-    SPLIT marker: the story cards themselves are no longer hardcoded
-    here. An editor inserts a live Article List block (3 columns, no
-    title) in the CMS at that point, so the newsroom's stories appear
-    automatically. The CSS that restyles that live block to match the
-    old static cards is in the <style> block below, in the clearly
-    marked "LIVE BLOCK OVERRIDES" section.
+    placeholder here anymore, see note below), then the fragment ENDS at
+    a SPLIT marker. The "Featured Stories" label band that used to sit
+    between the hero and the story cards has been removed entirely (no
+    live label, no title) — the hero section's own bottom padding now
+    provides the spacing before the live block, so don't remove that
+    padding without replacing it. An editor inserts a live Article List
+    block (3 columns, no title) in the CMS at the split marker, so the
+    newsroom's stories appear automatically. The CSS that restyles that
+    live block to match the old static cards is in the <style> block
+    below, in the clearly marked "LIVE BLOCK OVERRIDES" section.
   - The sticky "On this page" nav moved OUT of this fragment into
     acf-sections/section-nav.html, because in the design it sits below
     the Featured Stories cards — i.e. on the far side of the split.
@@ -219,16 +221,8 @@
   /* ---------- Hero ---------- */
   .vpm-vg .vg-hero-section {
     padding-top:56px;
+    padding-bottom:40px;
   }
-  /* Band that carries only the "Featured Stories" label; the cards themselves
-     are the live Article List block pasted immediately after this fragment. */
-  .vpm-vg .vg-featured-band {
-    padding-top:16px;
-    padding-bottom:16px;
-  }
-  /* the label's own bottom margin would collapse out through the bottom of the
-     fragment and show as a white strip above the live block — zero it here */
-  .vpm-vg .vg-featured-band .vg-section-label {margin-bottom:0;}
   .vpm-vg .vg-hero-row {
     display:flex;
     gap:48px;
@@ -468,36 +462,36 @@
   }
   .vpm-vg .vg-dates-box {
     background:var(--azure-13);
-    border:1px solid var(--yellow-52);
-    border-top-width:3px;
-    padding:24px 25px;
+    border-left:3px solid var(--yellow-52);
+    padding:24px;
   }
-  .vpm-vg .vg-dates-box .vg-eyebrow {color:var(--yellow-52);margin-bottom:16px;}
+  .vpm-vg .vg-dates-box .vg-eyebrow {color:var(--yellow-52);margin-bottom:16px;font-size:12px;}
   .vpm-vg .vg-date-row {
     display:flex;
     gap:16px;
-    padding:14px 0;
+    padding:12px 0;
     border-bottom:1px solid var(--border-faint3);
   }
   .vpm-vg .vg-date-row:last-of-type {border-bottom:none;}
   .vpm-vg .vg-date-chip {
     font-family:'Oswald',Impact,sans-serif;
+    font-weight:600;
     color:var(--yellow-52);
-    font-size:22px;
-    line-height:1.27;
+    font-size:24px;
+    line-height:1.2;
     text-align:center;
     min-width:56px;
     flex-shrink:0;
   }
   .vpm-vg .vg-date-info-title {
-    font-weight:500;
-    font-size:14px;
+    font-weight:600;
+    font-size:15px;
     color:var(--white);
     margin:0 0 2px;
   }
   .vpm-vg .vg-date-info-sub {
-    font-size:12px;
-    color:var(--grey-53);
+    font-size:13px;
+    color:#9aa9b8;
     margin:0;
   }
   .vpm-vg .vg-cal-link {
@@ -513,6 +507,17 @@
     border-radius:2px;
     margin-top:16px;
   }
+  .vpm-vg .vg-find-district {
+    justify-content:center;
+    width:100%;
+    margin-top:16px;
+    padding-top:16px;
+    border-top:1px solid var(--border-faint3);
+    font-size:13px;
+    font-weight:500;
+    color:var(--azure-66);
+  }
+  .vpm-vg .vg-find-district svg {width:12px;height:12px;flex-shrink:0;}
   .vpm-vg .vg-promo-slot {
     border-radius:4px;
     overflow:hidden;
@@ -620,6 +625,11 @@
     color:var(--grey-53);
     margin-bottom:12px;
   }
+  /* ---------- Vertical Video Shorts (JW carousel) ---------- */
+  .vpm-vg .vg-jw-carousel [data-jw-placement-id] {
+    height:400px;
+  }
+
   .vpm-vg .vg-short-item {
     display:flex;
     gap:12px;
@@ -941,6 +951,7 @@
 
   .vpm-vg .vg-learn-more,
   .vpm-vg .vg-promo-link,
+  .vpm-vg .vg-find-district,
   .vpm-vg .vg-resources-bar a {
     display:inline-flex;
     align-items:center;
@@ -949,6 +960,7 @@
   }
   .vpm-vg .vg-learn-more:hover {color:#fff;gap:8px;}
   .vpm-vg .vg-promo-link:hover {color:#fff;}
+  .vpm-vg .vg-find-district:hover {color:#fff;gap:8px;}
   .vpm-vg .vg-resources-bar a {position:relative;}
   .vpm-vg .vg-resources-bar a::after {
     content:"";
@@ -1032,7 +1044,7 @@
 
   /* Tablet / small laptop */
   @media (max-width:980px){
-    .vpm-vg .vg-hero-section {padding-top:40px;}
+    .vpm-vg .vg-hero-section {padding-top:40px;padding-bottom:32px;}
     .vpm-vg .vg-hero-row {flex-direction:column;}
     .vpm-vg .vg-hero-main {min-width:0;}
     .vpm-vg .vg-sidebar {width:100%;flex:1 1 auto;flex-direction:row;flex-wrap:wrap;}
@@ -1063,7 +1075,7 @@
   @media (max-width:520px){
     .vpm-vg .vg-wrap {padding-left:16px;padding-right:16px;}
     .vpm-vg section.vg-block {padding:36px 0;}
-    .vpm-vg .vg-hero-section {padding-top:32px;}
+    .vpm-vg .vg-hero-section {padding-top:32px;padding-bottom:28px;}
     .vpm-vg .vg-coverage-grid {grid-template-columns:1fr;}
     .vpm-vg .vg-dates-box {padding:20px 18px;}
     .vpm-vg .vg-promo-inner {gap:8px;}
@@ -1089,11 +1101,13 @@
       <div class="vg-hero-main">
         <p class="vg-eyebrow">Virginia · 2026 General Election</p>
         <h1 class="vg-headline vg-heading-font">
-          <span class="vg-l1">VPM News</span>
+          <span class="vg-l1">Virginia</span>
           <span class="vg-l2">Voter</span>
           <span class="vg-l3">Guide</span>
         </h1>
-        <p class="vg-hero-dek">Get nonpartisan information about the candidates and measures on your Virginia ballot this November. VPM is here to help you vote with confidence.</p>
+        <p class="vg-hero-dek">Given the extraordinary nature of the 2026 election cycle, Virginia's five public media news stations — VPM, WAMU, WHRO, WMRA and Radio IQ — are partnering to ensure voters across the state get the full breadth of both the federal midterms, state and local elections.
+          
+        From early voting through Election Day and the results, the Virginia Elections Collaborative will provide you with coverage on the candidates and issues so you can make informed decisions at the ballot box.</p>
       </div>
 
       <aside class="vg-sidebar">
@@ -1101,24 +1115,24 @@
           <p class="vg-eyebrow">Important Dates</p>
 
           <div class="vg-date-row">
-            <div class="vg-date-chip">Oct<br>19</div>
+            <div class="vg-date-chip">Sep<br>18</div>
+            <div>
+              <p class="vg-date-info-title">Early In-Person Voting Begins</p>
+              <p class="vg-date-info-sub">45 days before Election Day</p>
+            </div>
+          </div>
+          <div class="vg-date-row">
+            <div class="vg-date-chip">Oct<br>23</div>
             <div>
               <p class="vg-date-info-title">Voter Registration Deadline</p>
               <p class="vg-date-info-sub">Register online at vote.virginia.gov</p>
             </div>
           </div>
           <div class="vg-date-row">
-            <div class="vg-date-chip">Sep<br>19</div>
+            <div class="vg-date-chip">Oct<br>31</div>
             <div>
-              <p class="vg-date-info-title">Absentee Ballot Request Opens</p>
-              <p class="vg-date-info-sub">No-excuse absentee available</p>
-            </div>
-          </div>
-          <div class="vg-date-row">
-            <div class="vg-date-chip">Sep<br>19</div>
-            <div>
-              <p class="vg-date-info-title">Early In-Person Voting Begins</p>
-              <p class="vg-date-info-sub">45 days before Election Day</p>
+              <p class="vg-date-info-title">Last Day of Early Voting</p>
+              <p class="vg-date-info-sub">Saturday before Election Day</p>
             </div>
           </div>
           <div class="vg-date-row">
@@ -1129,15 +1143,14 @@
             </div>
           </div>
 
-          <a class="vg-cal-link" href="#">Full Elections Calendar →</a>
+          <a class="vg-find-district" href="https://www.vote.virginia.gov/who-represents-me" target="_blank" rel="noopener">
+            Find your district
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
         </div>
       </aside>
     </div>
   </main>
-
-  <div class="vg-wrap vg-featured-band">
-    <div class="vg-section-label"><span class="vg-accent"></span><h2>Featured Stories</h2></div>
-  </div>
 </div>
 
 <!-- ===== SPLIT ===== LIVE BLOCK HERE: Featured Stories (article list) ===== -->

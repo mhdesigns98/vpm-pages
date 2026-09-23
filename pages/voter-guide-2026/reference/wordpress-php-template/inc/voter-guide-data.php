@@ -14,22 +14,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 function vpm_vg_important_dates() {
 	return array(
 		array(
+			'month'  => 'Sep',
+			'day'    => '18',
+			'label'  => 'Early In-Person Voting Begins',
+			'detail' => '45 days before Election Day',
+		),
+		array(
 			'month'  => 'Oct',
-			'day'    => '19',
+			'day'    => '23',
 			'label'  => 'Voter Registration Deadline',
 			'detail' => 'Register online at vote.virginia.gov',
 		),
 		array(
-			'month'  => 'Sep',
-			'day'    => '19',
-			'label'  => 'Absentee Ballot Request Opens',
-			'detail' => 'No-excuse absentee available',
-		),
-		array(
-			'month'  => 'Sep',
-			'day'    => '19',
-			'label'  => 'Early In-Person Voting Begins',
-			'detail' => '45 days before Election Day',
+			'month'  => 'Oct',
+			'day'    => '31',
+			'label'  => 'Last Day of Early Voting',
+			'detail' => 'Saturday before Election Day',
 		),
 		array(
 			'month'  => 'Nov',
@@ -123,7 +123,7 @@ function vpm_vg_faq() {
 	return array(
 		array(
 			'q' => 'How do I register to vote in Virginia?',
-			'a' => 'Register online at vote.virginia.gov, by mail, or in person at your local registrar’s office. The deadline to register is 15 days before the election — October 19 for the November 3 general election.',
+			'a' => 'Register online at vote.virginia.gov, by mail, or in person at your local registrar’s office. The deadline to register is 15 days before the election — October 23 for the November 3 general election.',
 		),
 		array(
 			'q' => 'Can I vote early or by absentee ballot?',

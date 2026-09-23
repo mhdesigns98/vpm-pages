@@ -12,7 +12,7 @@ font imports, no build step, images as absolute URLs.
 | 1 | Code Block — hero, Important Dates, "Featured Stories" label. **Carries the entire stylesheet.** | `header-section.html` |
 | 2 | **Article List (live CMS block)** — 3 columns, leave the title field EMPTY | — (editor-inserted) |
 | 3 | Code Block — sticky "On this page" nav + scrollspy script | `section-nav.html` |
-| 4 | Code Block — VPM Video Coverage | `video-coverage.html` |
+| 4 | Code Block — VPM Video Coverage (YouTube playlist player + JW vertical shorts carousel) | `video-coverage.html` |
 | 5 | Code Block — Key Virginia Elections | `key-virginia-elections.html` |
 | 6 | Code Block — Key Regional Races (+ Voter Resources bar) | `key-regional-races.html` |
 | 7 | Code Block — Voting FAQ | `voting-faq.html` |
@@ -33,7 +33,7 @@ contain a `[vpm_section id="..."]` shortcode):
 
 - **970×90 leaderboard** — its own full-width row between block 3 and block 4.
 - **300×250** — narrow column of a 2-column row beside block 1.
-- **300×600** — narrow column of a 2-column row beside block 5.
+- **300×600** — narrow column of a 2-column row beside block 4.
 
 ## Rules that matter
 
@@ -51,8 +51,8 @@ contain a `[vpm_section id="..."]` shortcode):
   used to be here).
 - **Keep the `vg-` prefixes.** A white-background bug on the live site was traced to
   generic names like `.wrap`/`.sidebar` colliding with the WordPress theme's CSS.
-- **Section ids** `#video`, `#elections`, `#regional`, `#faq` are what the nav links and
-  scrollspy target. Drop a section → drop its `<li>` in `section-nav.html`.
+- **Section ids** `#video`, `#elections`, `#regional`, `#faq` are what the
+  nav links and scrollspy target. Drop a section → drop its `<li>` in `section-nav.html`.
 
 ## Live block class structure (for reference)
 
