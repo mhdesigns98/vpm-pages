@@ -60,6 +60,13 @@ selectors). The other six fragments carry **zero CSS** by design. This is alread
 `header-section.html` — all 234 of its selectors also appear there, none unique. Only the
 header-section copy is live. Kept only for salvage.
 
+**`reference/newsletter-api-form.superseded.html` is dead code.** An Aug 2026 elections
+newsletter form that subscribed to Morning Monitor through newsletter-signup's `/api/subscribe`
+with an `elections` Mailchimp tag. Moved here from `newsletter-signup/public/` (where it was never
+committed) on 2026-09-25. The live form is `sections/newsletter-signup.html`, which posts straight
+to Mailchimp. Don't revive the API version as written: `/api/subscribe` now only applies allowlisted
+tags, so `elections` would be silently dropped unless it's added there first.
+
 **`reference/wordpress-php-template/`** holds the old custom page template and template parts.
 Not the path forward — the theme's Section Builder already does this job, and submitting a
 competing page template to the vendor who owns the theme is a slow, low-odds request. Two
