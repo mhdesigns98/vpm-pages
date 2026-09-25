@@ -46,8 +46,8 @@ light-DOM widget.
 
 ## Pre-ship status
 
-Not yet run through `/ship-widget`. Because this is Shadow DOM plus five sections of embedded
-video, the checks that matter most (`/ship-page`) are the sticky-player z-index and the 320px column.
+Not yet run through `/ship-page`. Because this is Shadow DOM plus five sections of embedded
+video, the checks that matter most are the sticky-player z-index and the 320px column.
 
 ## Sizing: px, not rem
 
