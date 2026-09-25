@@ -3,8 +3,9 @@
 ## Purpose
 
 Full page builds for vpm.org — one folder per page. This repo is the sibling of
-[`vpm-widgets`](https://github.com/mhdesigns98/vpm-widgets) (`~/Projects/vpm/vpm-widgets/`),
-which holds reusable blocks.
+[`vpm-widgets`](https://github.com/mhdesigns98/vpm-widgets), which holds reusable blocks. Clone
+it next to this repo, at `../vpm-widgets`: the design tokens live there, and the commands here read
+them from that path.
 
 ## ⚠️ This repo is PUBLIC
 
@@ -88,7 +89,7 @@ didn't change, the shape shouldn't either.
 
 ## Design Tokens
 
-**`~/Projects/vpm/vpm-widgets/tokens.css` is canonical for both repos.** There is deliberately no
+**`tokens.css` in `vpm-widgets` is canonical for both repos.** There is deliberately no
 copy in this repo — two token files would drift, and the drift would be invisible until two pages
 disagreed about VPM blue.
 
@@ -96,7 +97,7 @@ Read that file and copy the custom properties the page actually needs into its o
 block. Never link it externally: pages must survive as standalone paste-ins. No hard-coded hex
 values.
 
-Fuller narrative reference: `~/Projects/vpm/vpm-widgets/BRAND_GUIDE.md`.
+Fuller narrative reference: `BRAND_GUIDE.md` in `vpm-widgets`.
 
 ## Consuming widgets
 
@@ -145,12 +146,15 @@ supplies the page-level anchor targets its jump links point at.
 **If a `BRIEF.md` exists in the page folder, read it before building** and flag requests that
 contradict or expand its scope.
 
-VPM brand tokens and voice load automatically via the `vpm-design` skill.
+VPM brand tokens and voice load automatically via the `vpm-design` skill. It's committed here as a
+pointer at `.claude/skills/vpm-design/` that reads the real skill from `../vpm-widgets`. The
+slash commands (`/brief`, `/new-page`, `/ship-page`, `/consolidate-page`) are committed in
+`.claude/commands/`, so cloning both repos side by side is the whole setup.
 
 ## Pre-Ship Checklist
 
 **This checklist is canonical for pages** — it's the list `/ship-page` enforces. The widget
-equivalent lives in `~/Projects/vpm/vpm-widgets/CLAUDE.md` and is a different list on purpose: the
+equivalent lives in `vpm-widgets`' own `CLAUDE.md` and is a different list on purpose: the
 widget harness simulates *a block dropped into a hostile page*, which is not the situation a page
 build faces. Don't merge them.
 
