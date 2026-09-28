@@ -3,7 +3,7 @@
 Lookup table for existing page builds — check here before picking a new slug or namespace prefix so
 they don't collide. Kept out of `CLAUDE.md` so it isn't loaded into context on every session.
 
-Reusable blocks live in the sibling repo: `~/Projects/vpm/vpm-widgets/INDEX.md`.
+Reusable blocks live in the sibling repo, in `vpm-widgets`' `INDEX.md`.
 
 `/new-page` adds a row here when scaffolding.
 
