@@ -27,7 +27,6 @@ those links until the paste steps below are done. See `BRIEF.md`.
 
 Technical items — these can't be judged by looking at the page, so they're settled first:
 
-- [ ] 2026 rendering: `srcset` added with its Media Library 768w size (it's in the Media Library; the sized filename still needs looking up)
 - [ ] `grep -n TODO html.html` returns nothing
 - [ ] `/ship-page neighborhood-history` passes
 
