@@ -27,7 +27,7 @@
   --vpm-unwined-gray-200:   #E5E7E9;
 
   /* Type */
-  --vpm-unwined-font:         'Inter', 'GT America', 'Helvetica Neue', Arial, sans-serif;
+  --vpm-unwined-font:         'Public Sans', 'GT America', 'Helvetica Neue', Arial, sans-serif;
   --vpm-unwined-fs-display:   clamp(32px, 4vw, 56px);
   --vpm-unwined-fs-h2:        clamp(24px, 2.4vw, 32px);
   --vpm-unwined-fs-body-lg:   18px;
@@ -327,7 +327,7 @@
   --vpm-lwm-gray-050:   #F8F9FA;
 
   /* Type */
-  --vpm-lwm-font:       'Inter', 'GT America', 'Helvetica Neue', Arial, sans-serif;
+  --vpm-lwm-font:       'Public Sans', 'GT America', 'Helvetica Neue', Arial, sans-serif;
   --vpm-lwm-fs-h3:      20px;
   --vpm-lwm-fs-body-lg: 18px;
   --vpm-lwm-fs-body-sm: 14px;
