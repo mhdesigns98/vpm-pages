@@ -9,44 +9,80 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=Public+Sans:wght@300..800&display=swap" rel="stylesheet">
 <!--
   Preview only — not pasted anywhere. Loads sections/*.html in paste order into
-  mock wpp-base Section Builder wrappers, with some deliberately hostile host CSS,
-  so the fragments are checked against conditions like the real theme's.
-  Needs to be served over http (GitHub Pages, or `python3 -m http.server`).
+  the wpp-base Section Builder wrappers, under the REAL theme stylesheets pulled
+  live from vpm.org, so collisions show up here before they show up on staging.
+  Needs network access to vpm.org and to be served over http (GitHub Pages, or
+  `python3 -m http.server` from the repo root). Offline, the theme CSS silently
+  fails to load and this degrades to an unstyled-host check only.
 -->
+<link rel="stylesheet" href="https://www.vpm.org/wp-content/themes/wpp-base/assets/css/base.css?ver=1.4.24" onload="this.dataset.ok=1" onerror="this.dataset.ok=0">
+<link rel="stylesheet" href="https://www.vpm.org/wp-content/themes/wpp-base/assets/css/components.css?ver=1.4.24" onload="this.dataset.ok=1" onerror="this.dataset.ok=0">
+<link rel="stylesheet" href="https://www.vpm.org/wp-content/themes/wpp-base/assets/css/overrides.css?ver=1.4.24" onload="this.dataset.ok=1" onerror="this.dataset.ok=0">
+<link rel="stylesheet" href="https://www.vpm.org/wp-content/themes/wpp-base/assets/css/page-builder.css?ver=1.4.24" onload="this.dataset.ok=1" onerror="this.dataset.ok=0">
 <style>
-  /* Mock theme chrome */
-  body { margin: 0; font-family: Arial, sans-serif; background: #fff; }
+  /* Theme config vars, as the live page inlines them (#bsm-config-vars) */
+  :root {
+    --navy: #003865; --dark-navy: #101820; --blue: #6CACE4; --red: #c8102e;
+    --yellow: #E0E721; --white: #ffffff; --gray-bg: #EDEDED; --light-blue: #e8f0f8;
+    --gray-border: #e6e6e6; --gray-text-dark: #101820; --gray-text: #666666;
+    --link-color: #1a7fc3;
+    --font-primary: 'Public Sans', 'Helvetica Neue', Arial, sans-serif;
+    --font-condensed: 'IBM Plex Sans Condensed', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+    --font-body: 'Public Sans', 'Helvetica Neue', Arial, sans-serif;
+    --font-heading: 'IBM Plex Sans Condensed', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+  }
+  /* Preview-only chrome stand-ins (the real header/footer markup isn't reproduced) */
   .mock-bar { background: #003865; color: #fff; padding: 12px 16px; font: 600 13px Arial, sans-serif; }
-  .page-section { padding: 28px 0; }
-  .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
-  .page-hero { background: #003865; color: #fff; padding: 64px 0; }
-  .page-hero h1 { margin: 0 0 12px; font-size: 40px; }
-  .site-footer { background: #101820; color: #fff; padding: 48px 16px; }
-  /* Hostile host rules the fragments must survive */
-  h2 { font-size: 40px; color: #c8102e; margin: 2em 0; }
-  h3 { text-transform: uppercase; }
-  p { margin: 0 0 2em; }
-  img { border: 4px solid #f0f; }
-  a { color: #1a7fc3; }
+  .mock-footer { background: #101820; color: #fff; padding: 48px 16px; }
+  .preview-warn { position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; background: #c8102e;
+    color: #fff; font: 600 13px/1.4 Arial, sans-serif; padding: 8px 16px; }
 </style>
 </head>
-<body>
+<body class="page-template page-template-templates page-template-section-builder page">
   <div class="mock-bar">Mock wpp-base header</div>
-  <main>
-    <section class="page-section page-hero">
+  <main id="bsm-main">
+    <section class="page-section page-hero min-small align-left">
+      <div class="page-hero-overlay navy"></div>
       <div class="container">
-        <h1>Neighborhood History</h1>
-        <p>Native theme hero — not part of this build.</p>
+        <div class="page-hero-content">
+          <h1>Neighborhood History</h1>
+          <p class="page-hero-subtitle">Native theme hero — not part of this build.</p>
+        </div>
       </div>
     </section>
     <div id="blocks"></div>
   </main>
-  <footer class="site-footer">Mock footer</footer>
+  <footer class="mock-footer">Footer stand-in</footer>
 
 <script>
 (function () {
   var FILES = ['sections/01-timeline.html', 'sections/02-map.html', 'sections/03-closing.html'];
   var root = document.getElementById('blocks');
+
+  /* Flag theme CSS that didn't load and images that 404 (e.g. a wrong srcset guess) */
+  function warn(msg) {
+    var bar = document.querySelector('.preview-warn');
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.className = 'preview-warn';
+      document.body.appendChild(bar);
+    }
+    bar.textContent += (bar.textContent ? ' · ' : '') + msg;
+  }
+
+  function checkAssets() {
+    var links = document.querySelectorAll('link[href*="wpp-base"]');
+    var loaded = [].filter.call(links, function (l) { return l.dataset.ok === '1'; });
+    if (loaded.length < links.length) { warn('Theme CSS not loaded (' + loaded.length + '/' + links.length + ') — results are not representative'); }
+
+    document.querySelectorAll('.vpm-nh img').forEach(function (img) {
+      img.loading = 'eager';
+      function check() {
+        if (!img.naturalWidth) { warn('Image failed: ' + (img.currentSrc || img.src).split('/').pop()); }
+      }
+      if (img.complete) { check(); } else { img.addEventListener('load', check); img.addEventListener('error', check); }
+    });
+  }
 
   function mount(html) {
     var section = document.createElement('section');
@@ -70,7 +106,7 @@
         return r.text();
       }).then(mount);
     });
-  }, Promise.resolve()).catch(function (err) {
+  }, Promise.resolve()).then(checkAssets).catch(function (err) {
     root.textContent = 'Preview failed to load fragments — serve over http. ' + err.message;
   });
 })();

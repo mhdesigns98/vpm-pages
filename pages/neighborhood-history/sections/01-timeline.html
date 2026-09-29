@@ -94,6 +94,18 @@
     box-shadow: var(--shadow-focus);
   }
 
+  .vpm-nh-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
   .vpm-nh-eyebrow {
     display: block;
     font-size: var(--fs-eyebrow);
@@ -147,6 +159,7 @@
   .vpm-nh-timeline__item:first-child { border-top: 0; padding-top: 0; }
 
   .vpm-nh-timeline__media {
+    position: relative;
     display: block;
     aspect-ratio: 4 / 3;
     overflow: hidden;
@@ -265,11 +278,18 @@
       <h2 class="vpm-nh-heading" id="vpm-nh-timeline-heading">From department store to public media</h2>
     </header>
 
-    <ol class="vpm-nh-timeline__list">
+    <!-- srcset 768w filenames are computed from each image's 1080-high derivative;
+         WordPress rounds from the original, so a height can be off by 1px. preview.html
+         flags any that 404 — check the Media Library if it does. -->
+    <ol class="vpm-nh-timeline__list" role="list"><!-- role: list-style:none drops list semantics in Safari/VoiceOver -->
 
       <li class="vpm-nh-timeline__item">
         <a class="vpm-nh-timeline__media" href="https://www.vpm.org/wp-content/uploads/2026/09/Cohen-pre-1933.jpg">
-          <img src="https://www.vpm.org/wp-content/uploads/2026/09/Cohen-pre-1933-1379x1080.jpg" alt="The Cohen Company department store building on East Broad Street" width="1379" height="1080" loading="lazy">
+          <img src="https://www.vpm.org/wp-content/uploads/2026/09/Cohen-pre-1933-1379x1080.jpg"
+               srcset="https://www.vpm.org/wp-content/uploads/2026/09/Cohen-pre-1933-768x601.jpg 768w, https://www.vpm.org/wp-content/uploads/2026/09/Cohen-pre-1933-1379x1080.jpg 1379w"
+               sizes="(max-width: 760px) 100vw, 480px"
+               alt="The Cohen Company department store building on East Broad Street" width="1379" height="1080" loading="lazy">
+          <span class="vpm-nh-sr-only">(view full size)</span>
         </a>
         <div class="vpm-nh-timeline__text">
           <time class="vpm-nh-timeline__year" datetime="1886">1886</time>
@@ -281,7 +301,11 @@
 
       <li class="vpm-nh-timeline__item">
         <a class="vpm-nh-timeline__media" href="https://www.vpm.org/wp-content/uploads/2026/09/valentine-Charles-opening-day.jpg">
-          <img src="https://www.vpm.org/wp-content/uploads/2026/09/valentine-Charles-opening-day-1344x1080.jpg" alt="Crowd outside Charles Stores on opening day, 1936" width="1344" height="1080" loading="lazy">
+          <img src="https://www.vpm.org/wp-content/uploads/2026/09/valentine-Charles-opening-day-1344x1080.jpg"
+               srcset="https://www.vpm.org/wp-content/uploads/2026/09/valentine-Charles-opening-day-768x617.jpg 768w, https://www.vpm.org/wp-content/uploads/2026/09/valentine-Charles-opening-day-1344x1080.jpg 1344w"
+               sizes="(max-width: 760px) 100vw, 480px"
+               alt="Crowd outside Charles Stores on opening day, 1936" width="1344" height="1080" loading="lazy">
+          <span class="vpm-nh-sr-only">(view full size)</span>
         </a>
         <div class="vpm-nh-timeline__text">
           <time class="vpm-nh-timeline__year" datetime="1936">1936</time>
@@ -293,7 +317,11 @@
 
       <li class="vpm-nh-timeline__item">
         <a class="vpm-nh-timeline__media" href="https://www.vpm.org/wp-content/uploads/2026/09/Architecture-in-Downtown-Richmond-pg-76.jpg">
-          <img src="https://www.vpm.org/wp-content/uploads/2026/09/Architecture-in-Downtown-Richmond-pg-76-1275x1080.jpg" alt="The Charles Stores building after its façade was modernized" width="1275" height="1080" loading="lazy">
+          <img src="https://www.vpm.org/wp-content/uploads/2026/09/Architecture-in-Downtown-Richmond-pg-76-1275x1080.jpg"
+               srcset="https://www.vpm.org/wp-content/uploads/2026/09/Architecture-in-Downtown-Richmond-pg-76-768x651.jpg 768w, https://www.vpm.org/wp-content/uploads/2026/09/Architecture-in-Downtown-Richmond-pg-76-1275x1080.jpg 1275w"
+               sizes="(max-width: 760px) 100vw, 480px"
+               alt="The Charles Stores building after its façade was modernized" width="1275" height="1080" loading="lazy">
+          <span class="vpm-nh-sr-only">(view full size)</span>
         </a>
         <div class="vpm-nh-timeline__text">
           <time class="vpm-nh-timeline__year" datetime="1948">1948</time>
@@ -305,7 +333,11 @@
 
       <li class="vpm-nh-timeline__item">
         <a class="vpm-nh-timeline__media" href="https://www.vpm.org/wp-content/uploads/2026/09/Richmond_Times_Dispatch_Wed__Jan_14__1987_.jpg">
-          <img src="https://www.vpm.org/wp-content/uploads/2026/09/Richmond_Times_Dispatch_Wed__Jan_14__1987_-1396x1080.jpg" alt="Firefighters spray water on the burning building, January 1987" width="1396" height="1080" loading="lazy">
+          <img src="https://www.vpm.org/wp-content/uploads/2026/09/Richmond_Times_Dispatch_Wed__Jan_14__1987_-1396x1080.jpg"
+               srcset="https://www.vpm.org/wp-content/uploads/2026/09/Richmond_Times_Dispatch_Wed__Jan_14__1987_-768x594.jpg 768w, https://www.vpm.org/wp-content/uploads/2026/09/Richmond_Times_Dispatch_Wed__Jan_14__1987_-1396x1080.jpg 1396w"
+               sizes="(max-width: 760px) 100vw, 480px"
+               alt="Firefighters spray water on the burning building, January 1987" width="1396" height="1080" loading="lazy">
+          <span class="vpm-nh-sr-only">(view full size)</span>
         </a>
         <div class="vpm-nh-timeline__text">
           <time class="vpm-nh-timeline__year" datetime="1987-01-13">1987</time>

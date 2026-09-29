@@ -32,7 +32,10 @@ These sections are replaced by the blocks above — delete them once the new blo
 
 ## Verifying
 
-1. Open `../preview.html` (it loads these three files in order under simulated theme chrome).
+1. Open `../preview.html` over http with network access. It loads these three files in order under
+   the **real** `wpp-base` stylesheets from vpm.org. A red bar at the bottom means the theme CSS
+   didn't load (results aren't representative) or an image 404'd — most likely a `srcset` 768w
+   filename in `01-timeline.html`, whose heights were computed and can be off by 1px.
 2. Check 1440 / 980 / 760 / 320px: no horizontal page scroll, bands reach both edges.
 3. Exactly one `<h1>` (the native hero); fragments start at `<h2>`.
 4. Paste on staging, clear the Kinsta cache, and check the seams between the theme's section padding

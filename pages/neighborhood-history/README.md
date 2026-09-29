@@ -30,7 +30,7 @@ Read `sections/PASTE-ORDER.md` before pasting — it also lists the current sect
 | `sections/01-timeline.html` | Stylesheet + timeline |
 | `sections/02-map.html` | Map band with text description |
 | `sections/03-closing.html` | Lockup, copy, newsletter iframe + resize listener |
-| `preview.html` | Browser preview — loads the three fragments under simulated theme chrome |
+| `preview.html` | Browser preview — loads the three fragments under the live `wpp-base` CSS; flags missing CSS and broken images |
 
 ## Uses widget
 
