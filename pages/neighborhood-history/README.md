@@ -25,6 +25,7 @@ Read `sections/PASTE-ORDER.md` before pasting — it also lists the current sect
 | File | Purpose |
 |---|---|
 | `BRIEF.md` | Requirements, done criteria, open questions |
+| `DEV-REQUEST.md` | Unsent draft of layout questions for the `wpp-base` theme developers |
 | `sections/PASTE-ORDER.md` | Paste order, sections to remove, verification |
 | `sections/01-timeline.html` | Stylesheet + timeline |
 | `sections/02-map.html` | Map band with text description |
