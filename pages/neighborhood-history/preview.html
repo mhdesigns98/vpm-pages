@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neighborhood History — preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=Public+Sans:wght@300..800&display=swap" rel="stylesheet">
+<!--
+  Preview only — not pasted anywhere. Loads sections/*.html in paste order into
+  mock wpp-base Section Builder wrappers, with some deliberately hostile host CSS,
+  so the fragments are checked against conditions like the real theme's.
+  Needs to be served over http (GitHub Pages, or `python3 -m http.server`).
+-->
+<style>
+  /* Mock theme chrome */
+  body { margin: 0; font-family: Arial, sans-serif; background: #fff; }
+  .mock-bar { background: #003865; color: #fff; padding: 12px 16px; font: 600 13px Arial, sans-serif; }
+  .page-section { padding: 28px 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+  .page-hero { background: #003865; color: #fff; padding: 64px 0; }
+  .page-hero h1 { margin: 0 0 12px; font-size: 40px; }
+  .site-footer { background: #101820; color: #fff; padding: 48px 16px; }
+  /* Hostile host rules the fragments must survive */
+  h2 { font-size: 40px; color: #c8102e; margin: 2em 0; }
+  h3 { text-transform: uppercase; }
+  p { margin: 0 0 2em; }
+  img { border: 4px solid #f0f; }
+  a { color: #1a7fc3; }
+</style>
+</head>
+<body>
+  <div class="mock-bar">Mock wpp-base header</div>
+  <main>
+    <section class="page-section page-hero">
+      <div class="container">
+        <h1>Neighborhood History</h1>
+        <p>Native theme hero — not part of this build.</p>
+      </div>
+    </section>
+    <div id="blocks"></div>
+  </main>
+  <footer class="site-footer">Mock footer</footer>
+
+<script>
+(function () {
+  var FILES = ['sections/01-timeline.html', 'sections/02-map.html', 'sections/03-closing.html'];
+  var root = document.getElementById('blocks');
+
+  function mount(html) {
+    var section = document.createElement('section');
+    section.className = 'page-section page-code-block';
+    section.innerHTML = '<div class="container"><div class="page-code-block-html"></div></div>';
+    var slot = section.querySelector('.page-code-block-html');
+    slot.innerHTML = html;
+    /* innerHTML doesn't run scripts; recreate them so fragment JS executes */
+    slot.querySelectorAll('script').forEach(function (old) {
+      var s = document.createElement('script');
+      s.textContent = old.textContent;
+      old.replaceWith(s);
+    });
+    root.appendChild(section);
+  }
+
+  FILES.reduce(function (chain, file) {
+    return chain.then(function () {
+      return fetch(file).then(function (r) {
+        if (!r.ok) { throw new Error(file + ': ' + r.status); }
+        return r.text();
+      }).then(mount);
+    });
+  }, Promise.resolve()).catch(function (err) {
+    root.textContent = 'Preview failed to load fragments — serve over http. ' + err.message;
+  });
+})();
+</script>
+</body>
+</html>

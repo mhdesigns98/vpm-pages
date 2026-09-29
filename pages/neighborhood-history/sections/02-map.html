@@ -1,0 +1,31 @@
+<!--
+  Neighborhood History — Block 2 of 3: Map (Code Block)
+  =====================================================
+  Paste directly below block 1. Needs block 1's stylesheet on the page.
+
+  The navy band is painted full-bleed by .vpm-nh-band--inverse (see block 1)
+  without widening the layout. The theme's own section padding around this
+  Code Block will show as white above and below the band — verify on staging.
+-->
+<div class="vpm-nh">
+  <section class="vpm-nh-band vpm-nh-band--inverse vpm-nh-map" aria-labelledby="vpm-nh-map-heading">
+    <h2 class="vpm-nh-heading" id="vpm-nh-map-heading">Where we are today</h2>
+
+    <figure>
+      <img src="https://www.vpm.org/wp-content/uploads/2026/09/VPM_DowntownHQMap-WEB-2606-1398x1080.jpg"
+           srcset="https://www.vpm.org/wp-content/uploads/2026/09/VPM_DowntownHQMap-WEB-2606-768x593.jpg 768w,
+                   https://www.vpm.org/wp-content/uploads/2026/09/VPM_DowntownHQMap-WEB-2606-1280x989.jpg 1280w,
+                   https://www.vpm.org/wp-content/uploads/2026/09/VPM_DowntownHQMap-WEB-2606-1398x1080.jpg 1398w"
+           sizes="(max-width: 1200px) 100vw, 1200px"
+           alt="Map of downtown Richmond showing VPM's headquarters on East Broad Street, with nearby neighborhoods and landmarks. Described below."
+           width="1398" height="1080" loading="lazy">
+      <!-- TODO: verify against the map artwork before shipping. -->
+      <figcaption class="vpm-nh-map__desc" id="vpm-nh-map-desc">
+        VPM sits on East Broad Street in Monroe Ward, with Jackson Ward to the north, VCU to the
+        west and the Virginia State Capitol to the southeast, between I-95 and the Downtown
+        Expressway.
+        <a class="vpm-nh-map__open" href="https://maps.app.goo.gl/hjv3Nbz9q9o7uj576">Open in Google Maps</a>
+      </figcaption>
+    </figure>
+  </section>
+</div>

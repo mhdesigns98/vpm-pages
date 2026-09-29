@@ -1,0 +1,55 @@
+<!--
+  Neighborhood History — Block 3 of 3: Closing band (Code Block)
+  ==============================================================
+  Paste directly below block 2. Needs block 1's stylesheet on the page.
+
+  Replaces BOTH the old rich-text section (PNG headline + copy) and the old
+  newsletter Code Block. The iframe is unchanged from the live page; its resize
+  listener moved here from that block's JS field, guarded so a second copy on
+  the page never double-binds.
+-->
+<div class="vpm-nh">
+  <section class="vpm-nh-band vpm-nh-band--muted vpm-nh-closing" aria-labelledby="vpm-nh-closing-heading">
+
+    <div class="vpm-nh-closing__lockup">
+      <p class="vpm-nh-closing__tagline">Media that moves us forward</p>
+      <svg class="vpm-nh-closing__chevron" viewBox="0 0 48 64" aria-hidden="true" focusable="false">
+        <path d="M4 4 L32 32 L4 60" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="miter"/>
+        <path d="M18 4 L46 32 L18 60" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="miter" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <div class="vpm-nh-closing__body">
+      <div class="vpm-nh-closing__copy">
+        <h2 class="vpm-nh-heading" id="vpm-nh-closing-heading">From Sesame Street to Broad Street</h2>
+        <!-- TODO: refreshed copy (done criterion in BRIEF.md; owner is an open question).
+             The current live copy is below for reference — it reads as dated. -->
+        <p>This summer, VPM moved into our new headquarters in downtown Richmond — a milestone which marks the beginning of an exciting new chapter in VPM’s history.</p>
+        <p>We’re looking forward to welcoming you into our new space in the coming weeks and months for special events and programs. Sign up for The Weekly Update to hear about everything happening at VPM.</p>
+      </div>
+
+      <div class="vpm-nh-closing__signup">
+        <iframe
+          src="https://newsletter-signup-8kv.pages.dev/weekly-update.html"
+          title="VPM Weekly Update Newsletter Signup"
+          scrolling="auto"
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+
+  </section>
+</div>
+<script>
+(function () {
+  if (window._vpmNlResizeListener) { return; }
+  window._vpmNlResizeListener = true;
+  window.addEventListener('message', function (e) {
+    if (e.origin !== 'https://newsletter-signup-8kv.pages.dev') { return; }
+    if (!e.data || e.data.type !== 'vpm-nl-resize') { return; }
+    document.querySelectorAll('iframe').forEach(function (f) {
+      if (f.contentWindow === e.source) { f.style.height = e.data.height + 'px'; }
+    });
+  });
+})();
+</script>
