@@ -7,9 +7,11 @@
    No @import: the theme already loads Public Sans and IBM Plex Sans Condensed.
 
    Specificity: element resets are (0,1,1); every component rule is written
-   ".vpm-nh .vpm-nh-…" (0,2,0) so it beats both the resets and typical theme
-   rules like ".page-code-block-html h2". Text colors are set explicitly rather
-   than inherited from a parent the theme might recolor.
+   ".vpm-nh .vpm-nh-…" (0,2,0), which beats the resets and theme rules up to
+   (0,1,1) such as ".page-code-block-html h2". It LOSES to compound theme
+   selectors at (0,2,1)+ and to !important — only preview.html under the live
+   theme CSS proves this holds. Text color, size, line-height and family are
+   set explicitly on each text class rather than inherited.
    ================================================ */
 
 /* ---- Tokens (subset of vpm-widgets/tokens.css) ---- */
@@ -82,11 +84,21 @@
 .vpm-nh h3,
 .vpm-nh p,
 .vpm-nh ol,
+.vpm-nh li,
 .vpm-nh figure { margin: 0; padding: 0; }
+.vpm-nh ol,
+.vpm-nh li { list-style: none; }
+.vpm-nh li::before,
+.vpm-nh li::marker { content: none; }
 .vpm-nh h2,
 .vpm-nh h3 { text-transform: none; letter-spacing: normal; }
 .vpm-nh img { display: block; max-width: 100%; height: auto; border: 0; }
-.vpm-nh a { color: var(--fg-link); text-underline-offset: 3px; }
+.vpm-nh a {
+  color: var(--fg-link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
 .vpm-nh a:hover { color: var(--fg-link-hover); }
 .vpm-nh a:focus-visible {
   outline: 2px solid var(--nh-focus);
@@ -141,8 +153,9 @@
 .vpm-nh .vpm-nh-band--inverse .vpm-nh-heading { color: var(--fg-on-dark); }
 /* First/last bands sit against the theme's own section padding (white), so
    they carry no background and need no top/bottom padding of their own. */
-.vpm-nh .vpm-nh-band:first-child { padding-top: 0; }
-.vpm-nh .vpm-nh-band:last-child { padding-bottom: 0; }
+/* of-type, not child: survives an empty <p> injected by a content filter */
+.vpm-nh .vpm-nh-band:first-of-type { padding-top: 0; }
+.vpm-nh .vpm-nh-band:last-of-type { padding-bottom: 0; }
 
 /* =========================================
    Timeline
@@ -157,7 +170,8 @@
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   gap: var(--space-5);
   align-items: start;
-  padding-block: var(--space-6);
+  margin: 0;
+  padding: var(--space-6) 0;
   border-top: 1px solid var(--border-default);
 }
 .vpm-nh .vpm-nh-timeline__item:first-child { border-top: 0; padding-top: 0; }
@@ -169,10 +183,12 @@
   overflow: hidden;
   background: var(--bg-muted);
 }
+/* contain, not cover: archival scans (a book page, a newspaper clipping) are
+   shown whole in a uniform cell; the muted cell color fills the difference */
 .vpm-nh .vpm-nh-timeline__media img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 .vpm-nh .vpm-nh-timeline__placeholder {
   display: grid;
@@ -200,11 +216,15 @@
   color: var(--fg-default);
 }
 .vpm-nh .vpm-nh-timeline__caption {
+  font-family: var(--font-sans);
+  line-height: var(--lh-loose);
   margin-top: var(--space-3);
   font-size: var(--fs-body);
   color: var(--fg-default);
 }
 .vpm-nh .vpm-nh-timeline__credit {
+  font-family: var(--font-sans);
+  line-height: var(--lh-loose);
   margin-top: var(--space-3);
   font-size: var(--fs-caption);
   color: var(--fg-muted);
@@ -215,12 +235,18 @@
    ========================================= */
 .vpm-nh .vpm-nh-map .vpm-nh-heading { margin-bottom: var(--space-5); }
 .vpm-nh .vpm-nh-map__desc {
+  font-family: var(--font-sans);
+  line-height: var(--lh-loose);
   margin-top: var(--space-4);
   max-width: 720px;
   font-size: var(--fs-body-sm);
   color: var(--fg-on-dark-muted);
 }
-.vpm-nh .vpm-nh-map__open { color: var(--fg-on-dark); font-weight: 600; }
+.vpm-nh .vpm-nh-map__open {
+  color: var(--fg-on-dark);
+  font-weight: 600;
+  text-decoration: underline;
+}
 .vpm-nh .vpm-nh-map__open:hover { color: var(--vpm-yellow); }
 
 /* =========================================
@@ -256,6 +282,8 @@
 }
 .vpm-nh .vpm-nh-closing__copy .vpm-nh-heading { margin-bottom: var(--space-4); }
 .vpm-nh .vpm-nh-closing__text {
+  font-family: var(--font-sans);
+  line-height: var(--lh-loose);
   font-size: var(--fs-body);
   color: var(--fg-default);
 }

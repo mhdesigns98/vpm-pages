@@ -10,7 +10,7 @@
 <!--
   Preview only — not pasted anywhere. Loads html.html + css.css + js.js into a
   wpp-base Section Builder Code Block wrapper, under the REAL theme stylesheets pulled
-  live from vpm.org, so collisions show up here before they show up on staging.
+  live from vpm.org, so collisions show up here before you touch the live draft.
   Needs network access to vpm.org and to be served over http (GitHub Pages, or
   `python3 -m http.server` from the repo root). Offline, the theme CSS silently
   fails to load and this degrades to an unstyled-host check only.
@@ -39,11 +39,12 @@
   /* Preview-only chrome stand-ins (the real header/footer markup isn't reproduced) */
   .mock-bar { background: #003865; color: #fff; padding: 12px 16px; font: 600 13px Arial, sans-serif; }
   .mock-footer { background: #101820; color: #fff; padding: 48px 16px; }
-  .preview-warn { position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; background: #c8102e;
+  .preview-warn { position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; background: #1a7f37;
     color: #fff; font: 600 13px/1.4 Arial, sans-serif; padding: 8px 16px; }
+  .preview-warn.is-fail { background: #c8102e; }
 </style>
 </head>
-<body class="page-template page-template-templates page-template-section-builder page">
+<body class="wp-singular page-template page-template-templates page-template-section-builder page-template-templatessection-builder-php page page-id-490005 wp-theme-wpp-base">
   <div class="mock-bar">Mock wpp-base header</div>
   <main id="bsm-main">
     <section class="page-section page-hero min-small align-left">
@@ -63,35 +64,50 @@
 (function () {
   var root = document.getElementById('blocks');
 
-  /* Flag theme CSS that didn't load and images that 404 (e.g. a wrong srcset guess) */
-  function warn(msg) {
-    var bar = document.querySelector('.preview-warn');
-    if (!bar) {
-      bar = document.createElement('div');
-      bar.className = 'preview-warn';
-      document.body.appendChild(bar);
-    }
-    bar.textContent += (bar.textContent ? ' · ' : '') + msg;
+  /* Status bar: waits for window load and every image probe, then reports once */
+  function bar(msg, fail) {
+    var el = document.createElement('div');
+    el.className = 'preview-warn' + (fail ? ' is-fail' : '');
+    el.textContent = msg;
+    document.body.appendChild(el);
+  }
+
+  function probe(u) {
+    return new Promise(function (resolve) {
+      var img = new Image();
+      img.onload = function () { resolve(null); };
+      img.onerror = function () { resolve('Image failed: ' + u.split('/').pop()); };
+      img.src = u;
+    });
   }
 
   function checkAssets() {
-    var links = document.querySelectorAll('link[href*="wpp-base"]');
-    var loaded = [].filter.call(links, function (l) { return l.dataset.ok === '1'; });
-    if (loaded.length < links.length) { warn('Theme CSS not loaded (' + loaded.length + '/' + links.length + ') — results are not representative'); }
-
-    /* Probe every src/srcset candidate, not just the one this screen picked */
-    var urls = {};
-    document.querySelectorAll('.vpm-nh img').forEach(function (img) {
-      urls[img.getAttribute('src')] = 1;
-      (img.getAttribute('srcset') || '').split(',').forEach(function (c) {
-        var u = c.trim().split(/\s+/)[0];
-        if (u) { urls[u] = 1; }
-      });
+    var loaded = new Promise(function (resolve) {
+      if (document.readyState === 'complete') { resolve(); } else { window.addEventListener('load', resolve); }
     });
-    Object.keys(urls).forEach(function (u) {
-      var probe = new Image();
-      probe.onerror = function () { warn('Image failed: ' + u.split('/').pop()); };
-      probe.src = u;
+    return loaded.then(function () {
+      var problems = [];
+      var links = document.querySelectorAll('link[href*="wpp-base"]');
+      var ok = [].filter.call(links, function (l) { return l.dataset.ok === '1'; });
+      if (ok.length < links.length) {
+        problems.push('Theme CSS not loaded (' + ok.length + '/' + links.length + ') — results are not representative');
+      }
+      /* Every src, every srcset candidate, and every full-size link target */
+      var urls = {};
+      document.querySelectorAll('.vpm-nh img').forEach(function (img) {
+        urls[img.getAttribute('src')] = 1;
+        (img.getAttribute('srcset') || '').split(',').forEach(function (c) {
+          var u = c.trim().split(/\s+/)[0];
+          if (u) { urls[u] = 1; }
+        });
+      });
+      document.querySelectorAll('.vpm-nh a[href$=".jpg"]').forEach(function (a) { urls[a.href] = 1; });
+      var list = Object.keys(urls);
+      return Promise.all(list.map(probe)).then(function (res) {
+        problems = problems.concat(res.filter(Boolean));
+        if (problems.length) { bar(problems.join(' · '), true); }
+        else { bar('All checks passed — theme CSS loaded, ' + list.length + ' image URLs resolved', false); }
+      });
     });
   }
 

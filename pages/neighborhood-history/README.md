@@ -9,7 +9,8 @@
 Tells the story of the site of VPM's headquarters at 15 E. Broad St. — Cohen Co. (1886), Charles
 Stores (1936), the 1948 façade, the 1987 fire, the parking-lot years, and VPM's 2026 move — as a
 captioned timeline, then shows where it sits on a full-bleed map and closes with the Weekly Update
-signup. Linked from vpm.org/about and forward.vpm.org/we-moved. See `BRIEF.md`.
+signup. To be linked from vpm.org/about and forward.vpm.org/we-moved once it's live — don't add
+those links until the paste steps below are done. See `BRIEF.md`.
 
 ## Files
 
@@ -28,7 +29,7 @@ Every item is a `TODO` comment in `html.html` — comments don't render, so a st
 the placeholder instead:
 
 - [ ] 2026 timeline entry has its current-day building photo (it renders a "Photo to come" box)
-- [ ] 2026 caption is final copy
+- [ ] 2026 caption is final copy, with a credit line and alt text for the new photo
 - [ ] Closing copy is refreshed — the current text ("This summer…", "coming weeks and months") is dated
 - [ ] Timeline heading is final
 - [ ] Map description checked against the map artwork
@@ -41,20 +42,24 @@ the placeholder instead:
 Order matters: verify on a draft before touching the old sections, and keep a copy of what you delete.
 
 1. **Preview.** From the repo root, `python3 -m http.server`, open
-   `/pages/neighborhood-history/preview.html` with network access. No red bar at the bottom = theme
-   CSS loaded and every image (including every `srcset` candidate) resolved.
+   `/pages/neighborhood-history/preview.html` with network access and wait for the status bar at
+   the bottom: green means the theme CSS loaded and every image resolved (each `src`, every `srcset`
+   candidate, and each full-size link target); red lists what failed.
 2. **Back up the old sections.** Before deleting anything, copy out of the editor: the gray `page-grid`
    row (rich-text PNG + copy, and the newsletter Code Block including its **JS field**), the
    `page-gallery` (with its captions), and the map image block. Save them outside the repo.
 3. **Add one Code Block** directly below the native Page Hero: `html.html` → HTML field,
    `css.css` → CSS field, `js.js` → JS field.
-4. **Preview the draft** (the page is unpublished, so WordPress preview is safe). Clear the Kinsta
+4. **Preview the draft.** The page is an unpublished draft and nothing links to it yet, so WordPress
+   preview is the staging step here. Clear the Kinsta
    cache if what you see looks stale. Check:
    - the navy map band reaches both window edges (if it stops at the container, a theme ancestor
      has `overflow: hidden` — see `DEV-REQUEST.md` #7)
    - clicking a timeline image opens the full-size file, and the Stream Player / `pjax.js` and the
      theme lightbox don't hijack the click
-   - the newsletter iframe resizes to its content (no inner scrollbar)
+   - the newsletter iframe resizes to its content (no inner scrollbar) — both on a full page load
+     **and** after arriving from another vpm.org page (pjax navigation), since pjax may not run the
+     Code Block's JS field
    - 320px wide: no horizontal page scroll
 5. **Delete the old sections** only after step 4 passes.
 
