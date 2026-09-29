@@ -38,7 +38,6 @@ it renders with the real theme and nobody outside can see it. Marked `REVIEW:` i
 
 - [ ] Closing copy (drafted to the vpm-design voice) approved
 - [ ] 2026 rendering credit confirmed (currently "Rendering: VPM")
-- [ ] 2026 rendering alt text describes this view (currently generic)
 
 ## 🔁 After launch
 
