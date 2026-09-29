@@ -27,7 +27,7 @@
    ============================================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800&family=Barlow+Condensed:wght@700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap');
 
 /* -----------------------------------------------------------------------------
    1. Tokens - merged from both sheets, deduped, promoted to :root
@@ -49,7 +49,7 @@
   /* Type */
   --vpm-font:           'GT America', 'Barlow', Arial, Helvetica, sans-serif;
   --vpm-font-condensed: 'GT America', 'Barlow Condensed', Arial, Helvetica, sans-serif;
-  --vpm-font-body:      Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --vpm-font-body: 'Public Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
   /* Base */
   --bg-light:       #ffffff;

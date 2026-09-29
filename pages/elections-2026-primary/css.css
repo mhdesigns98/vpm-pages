@@ -39,7 +39,7 @@
   flex-shrink: 0;
   width: 44px;
   height: 44px;
-  background: #c8102e;
+  background: #EE2737;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -55,7 +55,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #c8102e;
+  color: #E0E721;
   margin-bottom: 0.2rem;
 }
 
@@ -97,8 +97,8 @@
 }
 
 .vpm-elec26-date-card--highlight {
-  border-color: #c8102e;
-  background: rgba(200,16,46,0.12);
+  border-color: #EE2737;
+  background: rgba(238,39,55,0.12);
 }
 
 .vpm-elec26-date-label {
@@ -216,7 +216,7 @@
   transition: background 0.15s;
 }
 
-.vpm-elec26-nav-btn:hover { background: #c8102e; }
+.vpm-elec26-nav-btn:hover { background: #EE2737; }
 .vpm-elec26-nav-btn:disabled { background: #ccc; cursor: not-allowed; }
 
 /* ── Articles ── */
