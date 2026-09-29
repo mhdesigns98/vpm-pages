@@ -27,7 +27,7 @@ those links until the paste steps below are done. See `BRIEF.md`.
 
 Technical items — these can't be judged by looking at the page, so they're settled first:
 
-- [ ] 2026 rendering moved into the Media Library with sized URLs + `srcset` (the linked original is 9.8 MB)
+- [ ] 2026 rendering: `srcset` added with its Media Library 768w size (it's in the Media Library; the sized filename still needs looking up)
 - [ ] `grep -n TODO html.html` returns nothing
 - [ ] `/ship-page neighborhood-history` passes
 
@@ -38,6 +38,7 @@ it renders with the real theme and nobody outside can see it. Marked `REVIEW:` i
 
 - [ ] Closing copy (drafted to the vpm-design voice) approved
 - [ ] 2026 rendering credit confirmed (currently "Rendering: VPM")
+- [ ] 2026 rendering alt text describes this view (currently generic)
 
 ## 🔁 After launch
 

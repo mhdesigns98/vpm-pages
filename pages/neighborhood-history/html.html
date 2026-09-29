@@ -81,13 +81,16 @@
       </li>
 
       <li class="vpm-nh-timeline__item">
-        <!-- TODO: 9.8 MB / 6000×3375 original from the old Brightspot bucket. Upload to the
-             WordPress Media Library and swap in its sized URLs (with srcset, like the entries
-             above) before pasting — as-is, every visitor downloads the full file. -->
-        <a class="vpm-nh-timeline__media" href="https://k1-prod-vpm.s3.us-east-2.amazonaws.com/brightspot/90/3d/d8f3c0af4a02ba844af86bef21c6/vpm-rendering-overall-broad-street.JPG">
-          <img src="https://k1-prod-vpm.s3.us-east-2.amazonaws.com/brightspot/90/3d/d8f3c0af4a02ba844af86bef21c6/vpm-rendering-overall-broad-street.JPG"
-               alt="Architectural rendering of VPM's glass-fronted headquarters on East Broad Street, between Waller &amp; Company Jewelers and a row of historic storefronts"
-               width="6000" height="3375" loading="lazy">
+        <!-- TODO: add srcset with the WordPress 768w size (filename is -768xHEIGHT.jpeg,
+             height depends on the upload's dimensions — check the Media Library), like the
+             entries above. No width/height attributes: the 4:3 cell sets the layout box, and
+             the upload's real dimensions weren't available when this was wired in. -->
+        <!-- REVIEW: alt text is generic because the new rendering wasn't viewable when wired in;
+             describe what this view actually shows. -->
+        <a class="vpm-nh-timeline__media" href="https://www.vpm.org/wp-content/uploads/2026/09/vpm-rendering-front-broad-st-2.jpeg">
+          <img src="https://www.vpm.org/wp-content/uploads/2026/09/vpm-rendering-front-broad-st-2.jpeg"
+               alt="Architectural rendering of VPM's headquarters at 15 E. Broad St."
+               loading="lazy">
           <span class="vpm-nh-sr-only">(view full size)</span>
         </a>
         <div class="vpm-nh-timeline__text">
