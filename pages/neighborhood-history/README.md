@@ -29,7 +29,7 @@ Every item is a `TODO` comment in `html.html` — comments don't render, so a st
 the placeholder instead:
 
 - [ ] 2026 timeline entry has its current-day building photo (it renders a "Photo to come" box)
-- [ ] 2026 caption is final copy, with a credit line and alt text for the new photo
+- [ ] 2026 photo has a credit line and alt text
 - [ ] Closing copy is refreshed — the current text ("This summer…", "coming weeks and months") is dated
 - [ ] Timeline heading is final
 - [ ] Map description checked against the map artwork
