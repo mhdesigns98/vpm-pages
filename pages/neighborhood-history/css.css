@@ -93,13 +93,16 @@
 .vpm-nh h2,
 .vpm-nh h3 { text-transform: none; letter-spacing: normal; }
 .vpm-nh img { display: block; max-width: 100%; height: auto; border: 0; }
+/* !important on link color only: the pre-ship check assumes a host rule like
+   "a { color: … !important }", which no specificity can beat. Every other
+   link color below sets its own !important value for the same reason. */
 .vpm-nh a {
-  color: var(--fg-link);
+  color: var(--fg-link) !important;
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
-.vpm-nh a:hover { color: var(--fg-link-hover); }
+.vpm-nh a:hover { color: var(--fg-link-hover) !important; }
 .vpm-nh a:focus-visible {
   outline: 2px solid var(--nh-focus);
   outline-offset: 2px;
@@ -242,12 +245,17 @@
   font-size: var(--fs-body-sm);
   color: var(--fg-on-dark-muted);
 }
+/* Own line with a 44px tap target, rather than an inline link at 16px */
 .vpm-nh .vpm-nh-map__open {
-  color: var(--fg-on-dark);
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: var(--space-2);
+  color: var(--fg-on-dark) !important;
   font-weight: 600;
   text-decoration: underline;
 }
-.vpm-nh .vpm-nh-map__open:hover { color: var(--vpm-yellow); }
+.vpm-nh .vpm-nh-map__open:hover { color: var(--vpm-yellow) !important; }
 
 /* =========================================
    Closing band (lockup + copy + newsletter)
