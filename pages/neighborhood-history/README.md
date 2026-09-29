@@ -32,7 +32,6 @@ the placeholder instead:
 - [ ] 2026 photo has a credit line and alt text
 - [ ] Closing copy is refreshed — the current text ("This summer…", "coming weeks and months") is dated
 - [ ] Timeline heading is final
-- [ ] Map description checked against the map artwork
 - [ ] Chevron swapped for marketing's own file (the SVG in `html.html` is an approximation)
 - [ ] `grep -n TODO html.html` returns nothing
 - [ ] `/ship-page neighborhood-history` passes
