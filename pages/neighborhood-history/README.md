@@ -23,17 +23,27 @@ those links until the paste steps below are done. See `BRIEF.md`.
 | `BRIEF.md` | Requirements, done criteria, open questions |
 | `DEV-REQUEST.md` | Unsent draft of layout questions for the `wpp-base` theme developers |
 
-## ⛔ Do not paste until
+## ⛔ Before pasting
 
-Every item is a `TODO` comment in `html.html` — comments don't render, so a straight paste ships
-the placeholder instead:
+Technical items — these can't be judged by looking at the page, so they're settled first:
 
 - [ ] 2026 rendering moved into the Media Library with sized URLs + `srcset` (the linked original is 9.8 MB)
-- [ ] 2026 rendering credit confirmed (currently "Rendering: VPM")
-- [ ] Closing copy (drafted) approved by its owner
-- [ ] Chevron swapped for marketing's own file (the SVG in `html.html` is an approximation)
 - [ ] `grep -n TODO html.html` returns nothing
 - [ ] `/ship-page neighborhood-history` passes
+
+## 👀 Before publishing — review on the WordPress draft
+
+Marketing and the copy owner review the pasted draft in WordPress preview (paste step 4), where
+it renders with the real theme and nobody outside can see it. Marked `REVIEW:` in `html.html`.
+
+- [ ] Closing copy (drafted to the vpm-design voice) approved
+- [ ] 2026 rendering credit confirmed (currently "Rendering: VPM")
+
+## 🔁 After launch
+
+Marked `FOLLOW-UP:` in `html.html`. Safe to change on the live page.
+
+- [ ] Swap the chevron SVG for marketing's own file — the current one is a close approximation
 
 ## Paste steps
 
@@ -59,7 +69,9 @@ Order matters: verify on a draft before touching the old sections, and keep a co
      **and** after arriving from another vpm.org page (pjax navigation), since pjax may not run the
      Code Block's JS field
    - 320px wide: no horizontal page scroll
-5. **Delete the old sections** only after step 4 passes.
+5. **Marketing and copy review** on the same draft preview — see "Before publishing" above. Make any
+   copy changes in `html.html` here too, so the repo stays the source of truth.
+6. **Delete the old sections** only after steps 4 and 5 pass, then publish.
 
 ## Uses widget
 
