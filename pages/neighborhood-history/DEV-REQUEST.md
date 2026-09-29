@@ -36,9 +36,7 @@ behavior I'd like to check with you. Some of it may be intended, so questions fi
    grid column?
 6. **Section spacing:** the image block section (`bsm-block-section`) has no bottom padding, so
    its content touches the footer, while the other sections have 28–45px. Is there a spacing
-   setting per section I've missed? If not, could all sections share one default gap — ideally
-   with an option to set it to zero, so a Code Block can supply its own full-width background
-   without a white strip above and below it?
+   setting per section I've missed? If not, could all sections share one default gap?
 7. **Full-width option:** is there a way to make an image block or code block span the full
    viewport width, the way `page-hero` does? If not, could you confirm the theme doesn't set
    `overflow: hidden` on `.container` or its parents? A code block that paints a full-width

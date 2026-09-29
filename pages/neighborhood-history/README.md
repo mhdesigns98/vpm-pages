@@ -1,38 +1,64 @@
 # Neighborhood History
 
-**Live URL:** https://www.vpm.org/neighborhood-history (currently `?page_id=490005`)
-**Shape:** `sections` — native hero + three Code Blocks
+**Live URL:** https://www.vpm.org/neighborhood-history (currently an unpublished draft at `?page_id=490005`)
+**Shape:** `acf-split` — native Page Hero + one Code Block (HTML + CSS + JS fields)
 **Namespace:** `vpm-nh-`
 
 ## Purpose
 
-Tells the story of VPM's headquarters building at 13–17 E. Broad St. — Cohen Co. (1886), Charles
-Stores (1936), the 1948 façade, the 1987 fire, and VPM's 2026 move — as a captioned timeline, then
-shows where it sits on a full-bleed map and closes with the Weekly Update signup. Linked from
-vpm.org/about. See `BRIEF.md`.
-
-## Paste order
-
-Read `sections/PASTE-ORDER.md` before pasting — it also lists the current sections to remove.
-
-1. Native Page Hero (unchanged)
-2. `sections/01-timeline.html` — carries the stylesheet
-3. `sections/02-map.html`
-4. `sections/03-closing.html`
+Tells the story of the site of VPM's headquarters at 15 E. Broad St. — Cohen Co. (1886), Charles
+Stores (1936), the 1948 façade, the 1987 fire, the parking-lot years, and VPM's 2026 move — as a
+captioned timeline, then shows where it sits on a full-bleed map and closes with the Weekly Update
+signup. Linked from vpm.org/about and forward.vpm.org/we-moved. See `BRIEF.md`.
 
 ## Files
 
 | File | Purpose |
 |---|---|
+| `html.html` | ACF HTML field — timeline, map band, closing band |
+| `css.css` | ACF CSS field — the whole stylesheet, scoped to `.vpm-nh` |
+| `js.js` | ACF JS field — newsletter iframe resize listener |
+| `preview.html` | Browser preview — loads the three files into a Code Block wrapper under the live `wpp-base` CSS; flags missing CSS and broken images |
 | `BRIEF.md` | Requirements, done criteria, open questions |
 | `DEV-REQUEST.md` | Unsent draft of layout questions for the `wpp-base` theme developers |
-| `sections/PASTE-ORDER.md` | Paste order, sections to remove, verification |
-| `sections/01-timeline.html` | Stylesheet + timeline |
-| `sections/02-map.html` | Map band with text description |
-| `sections/03-closing.html` | Lockup, copy, newsletter iframe + resize listener |
-| `preview.html` | Browser preview — loads the three fragments under the live `wpp-base` CSS; flags missing CSS and broken images |
+
+## ⛔ Do not paste until
+
+Every item is a `TODO` comment in `html.html` — comments don't render, so a straight paste ships
+the placeholder instead:
+
+- [ ] 2026 timeline entry has its current-day building photo (it renders a "Photo to come" box)
+- [ ] 2026 caption is final copy
+- [ ] Closing copy is refreshed — the current text ("This summer…", "coming weeks and months") is dated
+- [ ] Timeline heading is final
+- [ ] Map description checked against the map artwork
+- [ ] Chevron swapped for marketing's own file (the SVG in `html.html` is an approximation)
+- [ ] `grep -n TODO html.html` returns nothing
+- [ ] `/ship-page neighborhood-history` passes
+
+## Paste steps
+
+Order matters: verify on a draft before touching the old sections, and keep a copy of what you delete.
+
+1. **Preview.** From the repo root, `python3 -m http.server`, open
+   `/pages/neighborhood-history/preview.html` with network access. No red bar at the bottom = theme
+   CSS loaded and every image (including every `srcset` candidate) resolved.
+2. **Back up the old sections.** Before deleting anything, copy out of the editor: the gray `page-grid`
+   row (rich-text PNG + copy, and the newsletter Code Block including its **JS field**), the
+   `page-gallery` (with its captions), and the map image block. Save them outside the repo.
+3. **Add one Code Block** directly below the native Page Hero: `html.html` → HTML field,
+   `css.css` → CSS field, `js.js` → JS field.
+4. **Preview the draft** (the page is unpublished, so WordPress preview is safe). Clear the Kinsta
+   cache if what you see looks stale. Check:
+   - the navy map band reaches both window edges (if it stops at the container, a theme ancestor
+     has `overflow: hidden` — see `DEV-REQUEST.md` #7)
+   - clicking a timeline image opens the full-size file, and the Stream Player / `pjax.js` and the
+     theme lightbox don't hijack the click
+   - the newsletter iframe resizes to its content (no inner scrollbar)
+   - 320px wide: no horizontal page scroll
+5. **Delete the old sections** only after step 4 passes.
 
 ## Uses widget
 
-<!-- None. The timeline and "Media that moves us forward" lockup are built page-local for now;
-     promote them to vpm-widgets if a second page wants them (see BRIEF.md). -->
+<!-- None. The iframe is the existing newsletter-signup embed, not a vpm-widgets widget.
+     Timeline and lockup are page-local; promote to vpm-widgets if a second page wants them. -->
