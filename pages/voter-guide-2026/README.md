@@ -23,6 +23,8 @@ Consolidation of the two previously separate projects (`vpm-voter-guide` and
 ```
 sections/       canonical source — one ACF block-html fragment per page section
   PASTE-ORDER.md    paste order and the rules for placing them (read first)
+preview.html    GENERATED from sections/ in paste order — run ./.build-preview.py after
+                editing a fragment. What the share link and GitHub Pages preview show.
 demo/           static demo, deploys to Vercel (https://vpm-voter-guide.vercel.app)
 reference/      superseded material, kept for salvage — not the build
 ```
