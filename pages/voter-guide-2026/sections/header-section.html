@@ -11,8 +11,9 @@
   - The hero (h1 headline, dek, sidebar with Important Dates — no ad
     placeholder here anymore, see note below), then the fragment ENDS at
     a SPLIT marker. The "Featured Stories" label band that used to sit
-    between the hero and the story cards has been removed entirely (no
-    live label, no title) — the hero section's own bottom padding now
+    between the hero and the story cards has been removed (no visible
+    label; a visually hidden <h2>Featured Stories</h2> just before the split
+    keeps heading levels in order) — the hero section's own bottom padding now
     provides the spacing before the live block, so don't remove that
     padding without replacing it. An editor inserts a live Article List
     block (3 columns, no title) in the CMS at the split marker, so the
@@ -312,6 +313,20 @@
   .vpm-vg .vg-byline {
     font-size:11px;
     color:var(--grey-53);
+  }
+  /* Visually hidden but read by screen readers. Used for the "Featured Stories" h2 at the
+     end of this fragment. Absolutely positioned, so it adds no height at the seam. */
+  .vpm-vg .vg-sr-only {
+    position:absolute;
+    width:1px;
+    height:1px;
+    padding:0;
+    margin:-1px;
+    overflow:hidden;
+    clip:rect(0 0 0 0);
+    clip-path:inset(50%);
+    white-space:nowrap;
+    border:0;
   }
   /* =========================================================================
      LIVE BLOCK OVERRIDES — Featured Stories article list
@@ -1151,6 +1166,9 @@
       </aside>
     </div>
   </main>
+  <!-- Screen-reader-only heading for the live Featured Stories block that follows. Its cards
+       are h3s, so without this the page jumps h1 -> h3. Hidden, so the design is unchanged. -->
+  <h2 class="vg-sr-only">Featured Stories</h2>
 </div>
 
 <!-- ===== SPLIT ===== LIVE BLOCK HERE: Featured Stories (article list) ===== -->
