@@ -12,6 +12,9 @@
 
 # VPM News Voter Guide 2026
 
+VPM News' nonpartisan guide to Virginia's 2026 elections: important dates, key state and regional
+races, video coverage, a voting FAQ and a newsletter signup, on one page.
+
 Consolidation of the two previously separate projects (`vpm-voter-guide` and
 `vpm-voter-guide-2026`) into one. See `BRIEF.md` for goals and the deploy deadline.
 

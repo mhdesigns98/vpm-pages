@@ -1,4 +1,4 @@
-# Impact Report 2025 — page CSS + behavior
+# 2025 Impact Report
 
 The 2025 Impact Report page on vpm.org, as deployed: hero, sticky jump-links nav, and the
 "Awards Received During 2025" section. A **full page** assembled from WordPress Code Blocks,
