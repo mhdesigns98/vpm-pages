@@ -140,8 +140,11 @@ supplies the page-level anchor targets its jump links point at.
 3. Add it under `/pages/[slug]/` following the structure above
 4. Write a `README.md` covering purpose, live URL, paste order, and any `Uses widget:` lines
 5. **Pre-ship check** (`/ship-page`) — required before pasting into any CMS, see checklist below
-6. Commit and push to `main`
-7. GitHub Pages preview: `https://mhdesigns98.github.io/vpm-pages/pages/[slug]/`
+6. Commit on a branch and open a PR. Don't push straight to `main`. This repo is public, and a PR
+   is public the moment it's opened, not when it merges, so check what you're adding against the
+   public-repo rules above *before* opening it
+7. GitHub Pages preview: `https://mhdesigns98.github.io/vpm-pages/pages/[slug]/`. Pages builds
+   from `main`, so a new page's preview works once its PR is merged (`/share` checks this for you)
 
 **If a `BRIEF.md` exists in the page folder, read it before building** and flag requests that
 contradict or expand its scope.

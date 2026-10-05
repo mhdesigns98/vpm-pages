@@ -64,4 +64,5 @@ same parent folder, then open a Claude Code session here. The slash commands bel
 3. Build it; namespace every class (e.g. `vpm-impact25-`)
 4. Record any widgets it consumes in the page `README.md` as `Uses widget: [slug] (vpm-widgets)`
 5. `/ship-page [slug]` before pasting into any CMS
-6. Commit and push — preview at `https://mhdesigns98.github.io/vpm-pages/pages/[slug]/`
+6. Open a PR (don't push straight to `main`). Once it's merged, the preview is at
+   `https://mhdesigns98.github.io/vpm-pages/pages/[slug]/`

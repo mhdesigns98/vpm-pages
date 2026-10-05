@@ -76,6 +76,8 @@ Also add it to the `PAGES` array in `index.html` (repo root) so it shows in the 
 
 ## Step 6 — Commit and report
 
+If you're on `main`, create a branch first (`git checkout -b SLUG`). Then:
+
 ```bash
 git add pages/SLUG INDEX.md index.html && git commit -m "Scaffold SLUG page"
 ```
@@ -84,4 +86,4 @@ Report:
 > Scaffolded `pages/SLUG/` (SHAPE). Namespace: `PREFIX`.
 > Build away — then run `/ship-page SLUG` before pasting into the CMS.
 
-Don't push unless the user asks. This repo is public: before committing, check what you're adding against the public-repo rules in `CLAUDE.md`.
+Don't push unless the user asks, and never straight to `main`. When it's ready, push the branch and open a PR (see Workflow in `CLAUDE.md`). This repo is public, and the PR is public as soon as it's opened: before committing, check what you're adding against the public-repo rules in `CLAUDE.md`.
