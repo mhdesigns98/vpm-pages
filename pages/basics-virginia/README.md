@@ -1,5 +1,8 @@
 # The Basics Virginia™
 
+The Basics Virginia™ campaign page: a video hero, the five Basics principles, and sections on the
+program in action, the Virginia movement and exploring the principles in nature.
+
 Full campaign page for The Basics Virginia™ — five stacked sections, not a single droppable block:
 
 1. **Hero** — "The Basics Virginia™" heading beside a Vimeo video

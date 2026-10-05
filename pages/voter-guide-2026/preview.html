@@ -1,3 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preview — VPM News Voter Guide 2026</title>
+<!-- GENERATED FILE — edit sections/*.html or sections/PASTE-ORDER.md, then run ./.build-preview.py -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ---- Preview chrome only. Approximates the theme the fragments ship into (16px root, the
+       theme's fonts, its .container). Not part of the paste. ---- */
+html { font-size: 16px; }
+/* White like the theme, so a gap at a seam between blocks shows up as the white strip it
+   would be on the live page. */
+body { margin: 0; background: #fff; }
+.container { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
+.preview-note {
+  background: #E0E721;
+  color: #101820;
+  font: 600 13px/1.4 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  padding: 8px 20px;
+  text-align: center;
+}
+.preview-ad {
+  max-width: 970px;
+  height: 90px;
+  margin: 24px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed #B2B4B2;
+  color: #5A6470;
+  font: 12px 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: 0.04em;
+}
+</style>
+</head>
+<body>
+
+<div class="preview-note">Preview harness — sections pasted in PASTE-ORDER.md order. Featured Stories (a live CMS block) and the leaderboard ad are stand-ins; the two 300px ads are left out.</div>
+
+<!-- ===== Block 1: header-section.html ===== -->
 <!--
   VPM Voter Guide — Header Section (ACF)
   =======================================
@@ -1173,3 +1217,570 @@
 
 <!-- ===== SPLIT ===== LIVE BLOCK HERE: Featured Stories (article list) ===== -->
 
+
+<!-- ===== Block 2: live Article List (stand-in) ===== -->
+<!-- PREVIEW STAND-IN (not pasted): live CMS Article List block, Featured Stories -->
+<section class="page-article-grid cols-3">
+  <div class="container">
+    <div class="page-article-grid-inner">
+      <article class="page-article-card PromoA">
+        <div class="page-article-card-media"><a class="bsm-img-ph" href="#" aria-label="Placeholder story 1"></a></div>
+        <div class="page-article-category">Elections</div>
+        <h3 class="page-article-title"><a href="#">Placeholder headline for a featured election story</a></h3>
+        <div class="page-article-byline">Reporter Name</div>
+        <p class="page-article-excerpt">Excerpt text; hidden by the page CSS.</p>
+      </article>
+      <article class="page-article-card PromoA">
+        <div class="page-article-card-media"><a class="bsm-img-ph" href="#" aria-label="Placeholder story 2"></a></div>
+        <div class="page-article-category">Politics</div>
+        <h3 class="page-article-title"><a href="#">Placeholder headline for a featured election story</a></h3>
+        <div class="page-article-byline">Reporter Name</div>
+        <p class="page-article-excerpt">Excerpt text; hidden by the page CSS.</p>
+      </article>
+      <article class="page-article-card PromoA">
+        <div class="page-article-card-media"><a class="bsm-img-ph" href="#" aria-label="Placeholder story 3"></a></div>
+        <div class="page-article-category">Government</div>
+        <h3 class="page-article-title"><a href="#">Placeholder headline for a featured election story</a></h3>
+        <div class="page-article-byline">Reporter Name</div>
+        <p class="page-article-excerpt">Excerpt text; hidden by the page CSS.</p>
+      </article>
+    </div>
+  </div>
+</section>
+<!-- ===== Block 3: section-nav.html ===== -->
+<!--
+  VPM Voter Guide — Sticky Section Nav (ACF)
+  =========================================
+  Paste order: this fragment goes directly AFTER the live "Featured Stories"
+  Article List block and BEFORE Video Coverage. See acf-sections/README.md.
+
+  Why it's its own Code Block: in the original design the sticky nav sits
+  below the Featured Stories cards. Those cards are now a live CMS Article
+  List block, and a Code Block can't contain one — so the nav had to move out
+  of header-section.html into its own fragment on the far side of the split.
+
+  Requires the shared <style> block from header-section.html (or
+  _shared-styles.html) to be present on the page — this fragment carries no
+  CSS of its own.
+
+  The links target #video / #elections / #regional / #faq by id;
+  those ids must exist on the final page (they live in the Video Coverage,
+  Key Virginia Elections, Key Regional Races and Voting FAQ fragments)
+  for the links and the scrollspy highlight to work. Remove a <li> if you drop
+  that section.
+-->
+<div class="vpm-vg">
+  <nav class="vg-section-nav" aria-label="Page sections">
+    <div class="vg-wrap vg-section-nav-inner">
+      <span class="vg-section-nav-label">On this page</span>
+      <ul>
+        <li><a href="#video">Video Coverage</a></li>
+        <li><a href="#elections">Key Elections</a></li>
+        <li><a href="#regional">Regional Races</a></li>
+        <li><a href="#faq">Voting FAQ</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<script>
+  // Scrollspy: highlight the current section in the on-page nav
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.vg-section-nav a'));
+    if (!links.length) return;
+
+    // Smooth scroll on click. This replaces a global `html{scroll-behavior:smooth}`
+    // rule, which would have leaked out of the fragment and changed scrolling for
+    // the whole site.
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+    links.forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var target = document.getElementById(a.getAttribute('href').slice(1));
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({
+          behavior: (reduce && reduce.matches) ? 'auto' : 'smooth',
+          block: 'start'
+        });
+      });
+    });
+
+    if (!('IntersectionObserver' in window)) return;
+
+    // The sections this nav points at live in LATER Code Blocks, so they don't
+    // exist yet while this inline script runs. Wait for the full page before
+    // wiring the scrollspy, or it observes nothing and never highlights.
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initScrollspy);
+    } else {
+      initScrollspy();
+    }
+
+    function initScrollspy() {
+    var byId = {};
+    links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+
+    var sections = links
+      .map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); })
+      .filter(Boolean);
+
+    var visible = {};
+    function setActive() {
+      var current = null;
+      // pick the LAST section overlapping the activation band: when one section
+      // is scrolling out just as the next arrives, the incoming one is the one
+      // the reader is now in
+      sections.forEach(function (s) {
+        if (visible[s.id] && (!current || s.offsetTop > current.offsetTop)) current = s;
+      });
+      links.forEach(function (a) { a.classList.remove('vg-active'); });
+      if (current && byId[current.id]) byId[current.id].classList.add('vg-active');
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      // require real overlap: a section whose bottom edge exactly meets the top
+      // of the activation band reports isIntersecting with zero height, which
+      // would keep the previous section highlighted
+      entries.forEach(function (e) {
+        visible[e.target.id] = e.isIntersecting && e.intersectionRect.height > 0;
+      });
+      setActive();
+    // thin activation band just below the sticky nav (48px tall + a little
+    // slack), so the highlighted link is the section actually under the nav
+    }, { rootMargin: '-64px 0px -70% 0px', threshold: 0 });
+
+    sections.forEach(function (s) { observer.observe(s); });
+    setActive();
+    }
+  })();
+</script>
+
+<!-- PREVIEW STAND-IN (not pasted): 970x90 leaderboard, its own builder row -->
+<div class="preview-ad"><span>Ad · 970×90 leaderboard (separate builder row)</span></div>
+<!-- ===== Block 4: video-coverage.html ===== -->
+<!--
+  VPM Voter Guide — VPM Video Coverage Section (ACF)
+  Merged 2026-09-22: was two separate fragments/sections (Video Coverage +
+  Video Shorts) that read as duplicates on the page (near-identical titles,
+  both "watch VPM video" sections back to back). Now one section, one row:
+  the JW vertical-shorts carousel (left) sets the row height (clamped to
+  320-460px), and the YouTube playlist player (right, 16:9; title/byline
+  update live via the IFrame API, pulled from a previously-built
+  playlist-embed component) fills that same height, so the two always share
+  a top and bottom edge. The CTA row spans full width below both. Layout CSS
+  lives in the <style> below, not header-section.html, so re-pasting this
+  block alone can't break the pairing.
+  Requires the shared styles from header-section.html (or
+  _shared-styles.html) to be present elsewhere on the page.
+-->
+<style>
+  .vpm-vg .vg-vs-row {
+    display:grid;
+    grid-template-columns:minmax(0,2fr) minmax(0,3fr);
+    gap:24px;
+    margin-top:16px;
+  }
+  .vpm-vg .vg-vs-yt {
+    position:relative;
+    aspect-ratio:16/9;
+    min-height:320px;
+    max-height:460px;
+    background:#000;
+    border-radius:2px;
+    overflow:hidden;
+  }
+  .vpm-vg .vg-vs-yt iframe {
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:0;
+  }
+  /* JW sizes its cards once, at init, to (placement height - 24px), with 12px
+     padding above and below. The script below sets the placement to the
+     player's height + 24px before embed.js runs; the wrapper's -12px margins bleed that
+     padding out so card edges land exactly on the player's edges. */
+  .vpm-vg .vg-vs-jw {margin:-12px 0;}
+  .vpm-vg .vg-vs-jw [data-jw-placement-id] {height:405px;}
+  @media (max-width:980px){
+    .vpm-vg .vg-vs-row {grid-template-columns:1fr;}
+    .vpm-vg .vg-vs-yt {min-height:0;}
+    .vpm-vg .vg-vs-jw {margin:0;}
+    .vpm-vg .vg-vs-jw [data-jw-placement-id] {height:400px;}
+  }
+</style>
+<div class="vpm-vg">
+  <section class="vg-block vg-alt" id="video">
+    <div class="vg-wrap">
+      <div class="vg-section-label"><span class="vg-accent"></span><h2 class="vg-section-title">VPM Video Coverage</h2></div>
+      <p class="vg-section-sub">Watch VPM's election reporting</p>
+
+      <div class="vg-vs-row">
+        <div class="vg-vs-jw">
+          <div id="publisher_div" data-jw-placement-id="4CIEdm4o"></div>
+        </div>
+        <div>
+          <div class="vg-vs-yt">
+            <div id="vg-yt-playlist-player" style="position:absolute;inset:0;width:100%;height:100%;"></div>
+          </div>
+          <div class="vg-video-meta">
+            <p class="vg-kicker vg-k-red" id="vg-yt-status">Video</p>
+            <p class="vg-card-title" id="vg-yt-title">VPM News — Election Coverage Playlist</p>
+            <p class="vg-byline" id="vg-yt-byline">VPM News · 2026</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="vg-video-cta">
+        <a class="vg-yt-cta" href="https://www.youtube.com/@VPM" target="_blank" rel="noopener noreferrer">
+          <svg class="vg-yt-cta-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19 4.8 12 4.8 12 4.8s-7 0-8.9.6A3 3 0 0 0 1 7.5 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1c1.9.6 8.9.6 8.9.6s7 0 8.9-.6A3 3 0 0 0 23 16.5 31 31 0 0 0 23.5 12 31 31 0 0 0 23 7.5ZM9.8 15.3V8.7l5.7 3.3-5.7 3.3Z"/></svg>
+          Visit VPM on YouTube
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+<script>
+(function () {
+  var PLAYLIST_ID = 'PLDpD9qYyo0hIRsLNnOuzjot8VxVIp4rKb';
+  var player;
+
+  var statusEl = document.getElementById('vg-yt-status');
+  var titleEl = document.getElementById('vg-yt-title');
+  var bylineEl = document.getElementById('vg-yt-byline');
+
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  var previousReady = window.onYouTubeIframeAPIReady;
+  window.onYouTubeIframeAPIReady = function () {
+    if (typeof previousReady === 'function') previousReady();
+    player = new YT.Player('vg-yt-playlist-player', {
+      height: '100%',
+      width: '100%',
+      playerVars: { listType: 'playlist', list: PLAYLIST_ID, rel: 0, modestbranding: 1 },
+      events: {
+        onReady: function () { updateVideoInfo(); positionJwPlacement(); },
+        onStateChange: function (e) {
+          if (e.data === YT.PlayerState.PLAYING || e.data === YT.PlayerState.CUED) updateVideoInfo();
+        }
+      }
+    });
+  };
+
+  function updateVideoInfo() {
+    if (!player) return;
+    try {
+      var videoUrl = player.getVideoUrl();
+      var videoId = new URL(videoUrl).searchParams.get('v');
+      if (!videoId) return;
+
+      fetch('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=' + videoId + '&format=json')
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          statusEl.textContent = 'Now Playing';
+          titleEl.textContent = data.title || 'VPM News — Election Coverage Playlist';
+          bylineEl.textContent = data.author_name ? data.author_name : 'VPM News · 2026';
+        })
+        .catch(function () {
+          statusEl.textContent = 'Now Playing';
+        });
+    } catch (err) {
+      statusEl.textContent = 'Now Playing';
+    }
+  }
+
+  // Must run before embed.js: JW reads the placement height once and never re-measures.
+  function positionJwPlacement() {
+    if (window.matchMedia('(max-width:980px)').matches) return;
+    var yt = document.querySelector('#video .vg-vs-yt');
+    var jw = document.getElementById('publisher_div');
+    if (!yt || !jw) return;
+    var h = Math.round(yt.getBoundingClientRect().height);
+    if (h > 0) jw.style.height = (h + 24) + 'px';
+  }
+  positionJwPlacement();
+})();
+</script>
+<script src="https://cdn.jwplayer.com/v2/sites/I7gSgtcs/placements/embed.js"></script>
+
+<!-- ===== Block 5: key-virginia-elections.html ===== -->
+<!--
+  VPM Voter Guide — Key Virginia Elections Section (ACF)
+  Requires the shared styles from header-section.html (or
+  _shared-styles.html) to be present elsewhere on the page.
+
+  No ad placeholder here anymore — your CMS's own blocks can't nest
+  inside this Code block's HTML, only sit as independent sibling
+  blocks. This fragment now fills the WIDE column of a 2-column
+  builder row; put your ad's native block in the NARROW column beside
+  it (same pattern as the Header section's 300x250 ad). The old
+  .vg-promo-slot / .vg-slot-300x600 CSS is left in the shared
+  stylesheet unused, in case you want the placeholder-box look again
+  for some other purpose.
+-->
+<div class="vpm-vg">
+  <section class="vg-block" id="elections">
+    <div class="vg-wrap">
+      <div class="vg-content-slot-row">
+        <div class="vg-main">
+          <div class="vg-section-label"><span class="vg-accent"></span><h2 class="vg-section-title">Key Virginia Elections</h2></div>
+          <p class="vg-section-sub">The most consequential races on the 2026 Virginia ballot</p>
+
+          <div class="vg-elections-grid">
+            <div class="vg-election-card">
+              <p class="vg-emoji">🏛</p>
+              <h3>U.S. Senate</h3>
+              <p class="vg-matchup">Tim Kaine (D) vs. TBD (R)</p>
+              <p class="vg-desc">Sen. Tim Kaine seeks a third term in one of 2026's most-watched races. Republicans have fielded multiple primary challengers vying for the nomination in a state growing increasingly competitive at the federal level.</p>
+              <a class="vg-learn-more" href="#">Learn more →</a>
+            </div>
+            <div class="vg-election-card">
+              <p class="vg-emoji">🗳</p>
+              <h3>U.S. House — All 11 Districts</h3>
+              <p class="vg-matchup">Multiple incumbents &amp; challengers</p>
+              <p class="vg-desc">Virginia's full congressional delegation is on the ballot. Seats in VA-02 (Hampton Roads), VA-05 (Southside), and VA-07 (Richmond suburbs) are rated as toss-ups or lean seats by major election forecasters.</p>
+              <a class="vg-learn-more" href="#">Learn more →</a>
+            </div>
+            <div class="vg-election-card">
+              <p class="vg-emoji">⚖</p>
+              <h3>State Corporation Commission</h3>
+              <p class="vg-matchup">To be determined</p>
+              <p class="vg-desc">Voters will elect members to Virginia's powerful regulatory body overseeing utilities, insurance, and financial institutions — decisions that affect every Virginian's power bills and insurance rates.</p>
+              <a class="vg-learn-more" href="#">Learn more →</a>
+            </div>
+            <div class="vg-election-card">
+              <p class="vg-emoji">📋</p>
+              <h3>Governor's Race 2026</h3>
+              <p class="vg-matchup">Open seat — Primary TBD</p>
+              <p class="vg-desc">With the current governor term-limited, both parties are fielding competitive primaries. The open-seat contest will test whether Virginia's recent rightward shift holds at the state level.</p>
+              <a class="vg-learn-more" href="#">Learn more →</a>
+            </div>
+            <div class="vg-election-card">
+              <p class="vg-emoji">📜</p>
+              <h3>Ballot Question 2</h3>
+              <p class="vg-matchup">Constitutional amendment</p>
+              <p class="vg-desc">Virginia voters will also decide a statewide ballot question this November. Here's what it says, what it would change, and what a "yes" or "no" vote means.</p>
+              <a class="vg-learn-more" href="https://www.vpm.org/elections/2026-09-18/what-is-ballot-question-2-va/">Learn more →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- ===== Block 6: key-regional-races.html ===== -->
+<!--
+  VPM Voter Guide — Key Regional Races Section (ACF)
+  Bundles the "Voter Resources" link bar at the end (it directly
+  follows Regional Races in the original design). Delete that block
+  below if you want Regional Races on its own.
+  Requires the shared styles from header-section.html (or
+  _shared-styles.html) to be present elsewhere on the page.
+-->
+<div class="vpm-vg">
+  <section class="vg-block vg-alt" id="regional">
+    <div class="vg-wrap">
+      <div class="vg-section-label"><span class="vg-accent"></span><h2 class="vg-section-title">Key Regional Races</h2></div>
+      <p class="vg-section-sub">Find competitive congressional contests near you</p>
+
+      <div class="vg-regional-grid">
+        <div class="vg-regional-card">
+          <div class="vg-top-bar"></div>
+          <div class="vg-body">
+            <h3>Northern Virginia</h3>
+            <p class="vg-district">VA-10 &amp; VA-11</p>
+            <div class="vg-locality-tags">
+              <span>Fairfax County</span><span>Arlington</span><span>Alexandria City</span><span>Prince William</span>
+            </div>
+            <p class="vg-desc">The DC suburbs anchor competitive open-seat contests in some of the commonwealth's most closely watched districts.</p>
+          </div>
+        </div>
+        <div class="vg-regional-card">
+          <div class="vg-top-bar"></div>
+          <div class="vg-body">
+            <h3>Hampton Roads</h3>
+            <p class="vg-district">VA-02 &amp; VA-04</p>
+            <div class="vg-locality-tags">
+              <span>Virginia Beach</span><span>Norfolk</span><span>Chesapeake</span><span>Suffolk</span>
+            </div>
+            <p class="vg-desc">It's consistently one of Virginia's most closely contested regions, with a heavy military and coastal-economy influence.</p>
+          </div>
+        </div>
+        <div class="vg-regional-card">
+          <div class="vg-top-bar"></div>
+          <div class="vg-body">
+            <h3>Richmond Metro</h3>
+            <p class="vg-district">VA-04 &amp; VA-07</p>
+            <div class="vg-locality-tags">
+              <span>Richmond City</span><span>Henrico</span><span>Chesterfield</span>
+            </div>
+            <p class="vg-desc">The capital region's suburban growth is reshaping district lines, with VA-07's competitiveness drawing statewide attention.</p>
+          </div>
+        </div>
+        <div class="vg-regional-card">
+          <div class="vg-top-bar"></div>
+          <div class="vg-body">
+            <h3>Shenandoah Valley</h3>
+            <p class="vg-district">VA-06</p>
+            <div class="vg-locality-tags">
+              <span>Harrisonburg</span><span>Staunton</span><span>Augusta County</span>
+            </div>
+            <p class="vg-desc">A traditionally Republican stronghold where local turnout and agricultural policy debates could sway close down-ballot races.</p>
+          </div>
+        </div>
+        <div class="vg-regional-card">
+          <div class="vg-top-bar"></div>
+          <div class="vg-body">
+            <h3>Southwest Virginia</h3>
+            <p class="vg-district">VA-09</p>
+            <div class="vg-locality-tags">
+              <span>Bristol</span><span>Abingdon</span><span>Wise County</span>
+            </div>
+            <p class="vg-desc">One of the most rural and heavily Republican corners of the state, with energy and jobs policy dominating local debate.</p>
+          </div>
+        </div>
+        <div class="vg-regional-card">
+          <div class="vg-top-bar"></div>
+          <div class="vg-body">
+            <h3>Eastern Shore &amp; Rural East</h3>
+            <p class="vg-district">VA-01 &amp; VA-02</p>
+            <div class="vg-locality-tags">
+              <span>Accomack</span><span>Northampton</span><span>Middle Peninsula</span>
+            </div>
+            <p class="vg-desc">Part of the VA-02 swing district, this rural coastal region has a history of split-ticket voting and tight margins.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="vg-resources-bar">
+    <div class="vg-wrap">
+      <a href="#">Voter Resources</a>
+      <a href="#">Find Your Ballot</a>
+      <a href="#">Check Registration</a>
+      <a href="#">Early Voting Info</a>
+    </div>
+  </div>
+</div>
+<!-- ===== Block 7: voting-faq.html ===== -->
+<!--
+  VPM Voter Guide — Voting FAQ Section (ACF)
+  The accordion uses native <details>/<summary> — no JS required.
+  Requires the shared styles from header-section.html (or
+  _shared-styles.html) to be present elsewhere on the page.
+-->
+<div class="vpm-vg">
+  <section class="vg-block" id="faq">
+    <div class="vg-wrap" style="max-width:800px;">
+      <div class="vg-section-label"><span class="vg-accent"></span><h2 class="vg-section-title">Voting FAQ</h2></div>
+      <p class="vg-section-sub">Everything you need to cast your ballot in Virginia</p>
+
+      <div class="vg-faq-list">
+        <details class="vg-faq-item">
+          <summary>Who's running in Virginia in 2026?
+            <img class="vg-chevron" src="https://vpm-voter-guide.vercel.app/assets/icon-chevron.svg" alt="">
+          </summary>
+          <div class="vg-faq-answer">The 2026 elections are almost entirely about Congress. Sen. Mark Warner is seeking his third term and faces a Republican challenger in November. All 11 of Virginia's U.S. House seats are also on the ballot. There are also local races across the commonwealth. General Assembly districts are not affected by this year's elections.</div>
+        </details>
+        <details class="vg-faq-item">
+          <summary>How do I check — or update — my voter registration?
+            <img class="vg-chevron" src="https://vpm-voter-guide.vercel.app/assets/icon-chevron.svg" alt="">
+          </summary>
+          <div class="vg-faq-answer">Visit vote.virginia.gov to check your current registration status, update your address, or register for the first time. The deadline to register (or update) for a regular ballot in the November election is October 19. Virginia also allows same-day voter registration at early voting sites and on Election Day — but same-day registrants cast provisional ballots, which are counted separately and subject to approval by the local election board.</div>
+        </details>
+        <details class="vg-faq-item">
+          <summary>Can I vote early or by absentee ballot?
+            <img class="vg-chevron" src="https://vpm-voter-guide.vercel.app/assets/icon-chevron.svg" alt="">
+          </summary>
+          <div class="vg-faq-answer">Yes. Virginia offers no-excuse absentee voting — any registered voter can request a mail ballot or vote early in person without providing a reason. Early in-person voting begins 45 days before Election Day at your local registrar's office or satellite voting locations.</div>
+        </details>
+        <details class="vg-faq-item">
+          <summary>Do I have to do anything special to vote early?
+            <img class="vg-chevron" src="https://vpm-voter-guide.vercel.app/assets/icon-chevron.svg" alt="">
+          </summary>
+          <div class="vg-faq-answer">No. There's no special requirement — just show up at your local registrar's office or a satellite early voting location. A few things are different from Election Day: you'll vote at a different location than your usual precinct, the hours follow business or special Saturday hours rather than the standard 6 a.m.–7 p.m. window, and early ballots are typically tallied ahead of Election Day results.</div>
+        </details>
+        <details class="vg-faq-item">
+          <summary>Where can I vote early?
+            <img class="vg-chevron" src="https://vpm-voter-guide.vercel.app/assets/icon-chevron.svg" alt="">
+          </summary>
+          <div class="vg-faq-answer">Early votes can be cast at your local general registrar's office or any satellite polling stations your locality sets up. Registrar offices are generally open Monday–Friday; hours vary by location. Find your early voting site using the Virginia Department of Elections' tool at vote.virginia.gov — it's usually a different location from your Election Day precinct.</div>
+        </details>
+        <details class="vg-faq-item">
+          <summary>What ID do I need to bring to vote?
+            <img class="vg-chevron" src="https://vpm-voter-guide.vercel.app/assets/icon-chevron.svg" alt="">
+          </summary>
+          <div class="vg-faq-answer">Virginia accepts a range of photo and non-photo IDs. Accepted forms include: a Virginia driver's license, U.S. military ID, or passport; a tribal ID issued by one of Virginia's 11 recognized tribes; a recent utility bill, bank statement, or pay stub showing your name and address; a local, state, or federal government document with your name and address; or an ELECT-issued voter registration card. If you don't have an acceptable ID, you can sign an ID Confirmation Statement at the polls to cast a regular ballot.</div>
+        </details>
+        <details class="vg-faq-item">
+          <summary>What if I make a mistake on my ballot?
+            <img class="vg-chevron" src="https://vpm-voter-guide.vercel.app/assets/icon-chevron.svg" alt="">
+          </summary>
+          <div class="vg-faq-answer">If you're voting in person and make a mistake, notify a poll worker — they can void the spoiled ballot and issue you a new one. If voting absentee by mail, contact your local registrar's office as soon as possible for guidance before submitting.</div>
+        </details>
+        <details class="vg-faq-item">
+          <summary>How do I find my Election Day polling place?
+            <img class="vg-chevron" src="https://vpm-voter-guide.vercel.app/assets/icon-chevron.svg" alt="">
+          </summary>
+          <div class="vg-faq-answer">Your polling place is listed on your voter registration card and can be looked up anytime using the Virginia Department of Elections' "Where Do I Vote" tool on vote.virginia.gov.</div>
+        </details>
+        <details class="vg-faq-item">
+          <summary>Can I vote in person on Election Day?
+            <img class="vg-chevron" src="https://vpm-voter-guide.vercel.app/assets/icon-chevron.svg" alt="">
+          </summary>
+          <div class="vg-faq-answer">Yes. Polls are open from 6 a.m. to 7 p.m. on Election Day, November 3. If you're in line by 7 p.m., you are entitled to vote even if the line extends past closing time.</div>
+        </details>
+        <details class="vg-faq-item">
+          <summary>Can I vote if I have a felony conviction?
+            <img class="vg-chevron" src="https://vpm-voter-guide.vercel.app/assets/icon-chevron.svg" alt="">
+          </summary>
+          <div class="vg-faq-answer">Virginians with a past felony conviction may have their voting rights restored by the Governor. You can check your status or apply for restoration of rights through the Secretary of the Commonwealth's office.</div>
+        </details>
+        <details class="vg-faq-item">
+          <summary>Will I get an "I Voted" sticker if I vote early?
+            <img class="vg-chevron" src="https://vpm-voter-guide.vercel.app/assets/icon-chevron.svg" alt="">
+          </summary>
+          <div class="vg-faq-answer">Yes — early voters typically receive a sticker. Whether it's your locality's latest design may vary by location. Ask your local elections office!</div>
+        </details>
+      </div>
+
+      <div class="vg-faq-footnote">
+        Still have questions? Virginia's Department of Elections has resources available in multiple languages. <a href="#">elections.virginia.gov →</a>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- ===== Block 8: newsletter-signup.html ===== -->
+<!--
+  VPM Voter Guide — Newsletter Signup Section (ACF)
+  Native Mailchimp embedded-form POST, matching the pattern already used by the
+  standalone Widget Lab signup embeds (bypasses the custom /api/subscribe API
+  entirely — no backend, no Turnstile, no API key exposure). Subscribes into
+  Morning Monitor and tags with 1620445 ("Election Coverage") and 1620257
+  ("Website Embed"), confirmed via Mailchimp's own generated embed for those tags.
+  Requires the shared styles from header-section.html (or
+  _shared-styles.html) to be present elsewhere on the page.
+-->
+<div class="vpm-vg">
+  <div class="vg-newsletter-bar">
+    <span class="vg-eyebrow">Stay Informed</span>
+    <h2 class="vg-heading-font">VPM Elections Newsletter</h2>
+    <p>Get the latest Virginia election news, candidate profiles, and voting reminders, delivered to your inbox.</p>
+    <form action="https://vpm.us3.list-manage.com/subscribe/post?u=6fe41b3055c403be08140ec95&amp;id=26497cf3ad&amp;f_id=0016c9e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="vg-newsletter-form validate" target="_blank" novalidate>
+      <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required placeholder="Your email address">
+      <div hidden><input type="hidden" name="tags" value="1620445,1620257"></div>
+      <div aria-hidden="true" style="position:absolute;left:-5000px;">
+        <input type="text" name="b_6fe41b3055c403be08140ec95_26497cf3ad" tabindex="-1" value="">
+      </div>
+      <button type="submit" name="subscribe" id="mc-embedded-subscribe">Subscribe</button>
+    </form>
+  </div>
+</div>
+
+
+</body>
+</html>

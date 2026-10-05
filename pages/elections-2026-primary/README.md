@@ -1,6 +1,7 @@
-# Elections 2026 Primary Widget
+# Elections 2026 Primary
 
-2026 Virginia Primary Election promo widget — dates, video carousel, article links. Built for WordPress ACF.
+The 2026 Virginia primary block on VPM's elections page: key dates, a video carousel and links to
+coverage. Built for WordPress ACF (split-file).
 
 ## Files
 
