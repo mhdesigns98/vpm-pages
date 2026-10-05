@@ -1,5 +1,8 @@
 # Neighborhood History
 
+The story of the site of VPM's headquarters at 15 E. Broad St. in downtown Richmond, told as a
+photo timeline from 1886 to 2026, with a map of the neighborhood and a newsletter signup.
+
 **Live URL:** https://www.vpm.org/neighborhood-history (currently an unpublished draft at `?page_id=490005`)
 **Shape:** `acf-split` — native Page Hero + one Code Block (HTML + CSS + JS fields)
 **Namespace:** `vpm-nh-`
