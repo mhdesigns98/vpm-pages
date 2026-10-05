@@ -124,6 +124,7 @@ body { margin: 0; background: #fff; }
     --azure-28:#3d4652;
     --azure-40:#8e98a5;
     --azure-66:#6cace4;
+    --navy-brand:#00003f;
     --azure-79:#b9c8d8;
     --yellow-52:#e0e721;
     --red-54:#ee2737;
@@ -282,6 +283,7 @@ body { margin: 0; background: #fff; }
     text-transform:uppercase;
     margin:0 0 12px;
   }
+  .vpm-vg .vg-hero-main .vg-eyebrow {font-size:12px;}
   .vpm-vg .vg-headline {margin:0;font-weight:700;}
   .vpm-vg .vg-headline span {
     display:block;
@@ -292,9 +294,9 @@ body { margin: 0; background: #fff; }
     line-height:0.92;
     letter-spacing:-1px;
   }
-  .vpm-vg .vg-headline .vg-l1 {color:var(--azure-66);}
-  .vpm-vg .vg-headline .vg-l2 {color:var(--yellow-52);}
-  .vpm-vg .vg-headline .vg-l3 {color:var(--white);}
+  .vpm-vg .vg-headline .vg-l1 {color:var(--white);}
+  .vpm-vg .vg-headline .vg-l2 {color:var(--red-54);}
+  .vpm-vg .vg-headline .vg-l3 {color:var(--azure-66);}
   .vpm-vg .vg-hero-dek {
     color:var(--azure-79);
     font-size:16px;
@@ -519,23 +521,27 @@ body { margin: 0; background: #fff; }
     gap:24px;
     padding-top:16px;
   }
+  /* Header recolor (campaign-graphic alignment): hero sits on brand navy #00003F; the dates
+     card is white with a red edge and navy text. Scoped to .vg-header so the rest of the page
+     keeps its #101820 / yellow system. */
+  .vpm-vg.vg-header {background:var(--navy-brand);}
   .vpm-vg .vg-dates-box {
-    background:var(--azure-13);
-    border-left:3px solid var(--yellow-52);
+    background:var(--white);
+    border-left:4px solid var(--red-54);
     padding:24px;
   }
-  .vpm-vg .vg-dates-box .vg-eyebrow {color:var(--yellow-52);margin-bottom:16px;font-size:12px;}
+  .vpm-vg .vg-dates-box .vg-eyebrow {color:var(--navy-brand);margin-bottom:16px;font-size:12px;}
   .vpm-vg .vg-date-row {
     display:flex;
     gap:16px;
     padding:12px 0;
-    border-bottom:1px solid var(--border-faint3);
+    border-bottom:1px solid rgba(0,0,63,0.12);
   }
   .vpm-vg .vg-date-row:last-of-type {border-bottom:none;}
   .vpm-vg .vg-date-chip {
     font-family:'Oswald',Impact,sans-serif;
     font-weight:600;
-    color:var(--yellow-52);
+    color:var(--navy-brand);
     font-size:24px;
     line-height:1.2;
     text-align:center;
@@ -545,12 +551,12 @@ body { margin: 0; background: #fff; }
   .vpm-vg .vg-date-info-title {
     font-weight:600;
     font-size:15px;
-    color:var(--white);
+    color:var(--navy-brand);
     margin:0 0 2px;
   }
   .vpm-vg .vg-date-info-sub {
     font-size:13px;
-    color:#9aa9b8;
+    color:#4a5568;
     margin:0;
   }
   .vpm-vg .vg-cal-link {
@@ -571,10 +577,11 @@ body { margin: 0; background: #fff; }
     width:100%;
     margin-top:16px;
     padding-top:16px;
-    border-top:1px solid var(--border-faint3);
+    border-top:1px solid rgba(0,0,63,0.12);
     font-size:13px;
     font-weight:500;
-    color:var(--azure-66);
+    color:#1a6aa8;
+    min-height:44px;
   }
   .vpm-vg .vg-find-district svg {width:12px;height:12px;flex-shrink:0;}
   .vpm-vg .vg-promo-slot {
@@ -1019,7 +1026,7 @@ body { margin: 0; background: #fff; }
   }
   .vpm-vg .vg-learn-more:hover {color:#fff;gap:8px;}
   .vpm-vg .vg-promo-link:hover {color:#fff;}
-  .vpm-vg .vg-find-district:hover {color:#fff;gap:8px;}
+  .vpm-vg .vg-find-district:hover {color:#00003f;gap:8px;}
   .vpm-vg .vg-resources-bar a {position:relative;}
   .vpm-vg .vg-resources-bar a::after {
     content:"";
@@ -1093,6 +1100,9 @@ body { margin: 0; background: #fff; }
     border-radius:2px;
   }
 
+  /* light-blue ring is 2.4:1 on the white dates card (needs 3:1) — use navy there */
+  .vpm-vg .vg-dates-box a:focus-visible {outline-color:var(--navy-brand);}
+
   /* respect reduced-motion preferences */
   @media (prefers-reduced-motion:reduce){
     .vpm-vg * {animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;scroll-behavior:auto !important;}
@@ -1154,7 +1164,7 @@ body { margin: 0; background: #fff; }
   }
 </style>
 
-<div class="vpm-vg">
+<div class="vpm-vg vg-header">
   <main class="vg-wrap vg-hero-section">
     <div class="vg-hero-row">
       <div class="vg-hero-main">
@@ -1362,29 +1372,28 @@ body { margin: 0; background: #fff; }
   VPM Voter Guide — VPM Video Coverage Section (ACF)
   Merged 2026-09-22: was two separate fragments/sections (Video Coverage +
   Video Shorts) that read as duplicates on the page (near-identical titles,
-  both "watch VPM video" sections back to back). Now one section, one row:
-  the JW vertical-shorts carousel (left) sets the row height (clamped to
-  320-460px), and the YouTube playlist player (right, 16:9; title/byline
-  update live via the IFrame API, pulled from a previously-built
-  playlist-embed component) fills that same height, so the two always share
-  a top and bottom edge. The CTA row spans full width below both. Layout CSS
-  lives in the <style> below, not header-section.html, so re-pasting this
-  block alone can't break the pairing.
+  both "watch VPM video" sections back to back). Now one section, stacked at every width
+  (changed 2026-10-05; was side by side on desktop): the YouTube playlist player on top
+  (16:9, centered, max 820px; title/byline update live via the IFrame API), the JW
+  vertical-shorts carousel full width below it, then the CTA row. The JW placement is a
+  fixed 400px tall, so no script has to size it to the player. Layout CSS lives in the
+  <style> below, not header-section.html, so re-pasting this block alone can't break it.
   Requires the shared styles from header-section.html (or
   _shared-styles.html) to be present elsewhere on the page.
 -->
 <style>
   .vpm-vg .vg-vs-row {
     display:grid;
-    grid-template-columns:minmax(0,2fr) minmax(0,3fr);
+    grid-template-columns:minmax(0,1fr);
     gap:24px;
     margin-top:16px;
   }
+  /* Stacked at every width: YouTube player on top (centered, capped so it never gets taller
+     than ~460px), JW shorts carousel full width below it. */
+  .vpm-vg .vg-vs-player {order:-1;width:100%;max-width:820px;margin:0 auto;}
   .vpm-vg .vg-vs-yt {
     position:relative;
     aspect-ratio:16/9;
-    min-height:320px;
-    max-height:460px;
     background:#000;
     border-radius:2px;
     overflow:hidden;
@@ -1400,14 +1409,9 @@ body { margin: 0; background: #fff; }
      padding above and below. The script below sets the placement to the
      player's height + 24px before embed.js runs; the wrapper's -12px margins bleed that
      padding out so card edges land exactly on the player's edges. */
-  .vpm-vg .vg-vs-jw {margin:-12px 0;}
-  .vpm-vg .vg-vs-jw [data-jw-placement-id] {height:405px;}
-  @media (max-width:980px){
-    .vpm-vg .vg-vs-row {grid-template-columns:1fr;}
-    .vpm-vg .vg-vs-yt {min-height:0;}
-    .vpm-vg .vg-vs-jw {margin:0;}
-    .vpm-vg .vg-vs-jw [data-jw-placement-id] {height:400px;}
-  }
+  /* JW pads its carousel 12px on every side; bleed that out so cards align with the player. */
+  .vpm-vg .vg-vs-jw {margin:-12px;}
+  .vpm-vg .vg-vs-jw [data-jw-placement-id] {height:400px;}
 </style>
 <div class="vpm-vg">
   <section class="vg-block vg-alt" id="video">
@@ -1419,7 +1423,7 @@ body { margin: 0; background: #fff; }
         <div class="vg-vs-jw">
           <div id="publisher_div" data-jw-placement-id="4CIEdm4o"></div>
         </div>
-        <div>
+        <div class="vg-vs-player">
           <div class="vg-vs-yt">
             <div id="vg-yt-playlist-player" style="position:absolute;inset:0;width:100%;height:100%;"></div>
           </div>
@@ -1462,7 +1466,7 @@ body { margin: 0; background: #fff; }
       width: '100%',
       playerVars: { listType: 'playlist', list: PLAYLIST_ID, rel: 0, modestbranding: 1 },
       events: {
-        onReady: function () { updateVideoInfo(); positionJwPlacement(); },
+        onReady: function () { updateVideoInfo(); },
         onStateChange: function (e) {
           if (e.data === YT.PlayerState.PLAYING || e.data === YT.PlayerState.CUED) updateVideoInfo();
         }
@@ -1491,17 +1495,6 @@ body { margin: 0; background: #fff; }
       statusEl.textContent = 'Now Playing';
     }
   }
-
-  // Must run before embed.js: JW reads the placement height once and never re-measures.
-  function positionJwPlacement() {
-    if (window.matchMedia('(max-width:980px)').matches) return;
-    var yt = document.querySelector('#video .vg-vs-yt');
-    var jw = document.getElementById('publisher_div');
-    if (!yt || !jw) return;
-    var h = Math.round(yt.getBoundingClientRect().height);
-    if (h > 0) jw.style.height = (h + 24) + 'px';
-  }
-  positionJwPlacement();
 })();
 </script>
 <script src="https://cdn.jwplayer.com/v2/sites/I7gSgtcs/placements/embed.js"></script>
