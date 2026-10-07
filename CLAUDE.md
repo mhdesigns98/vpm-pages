@@ -117,6 +117,9 @@ copy.
 Live example: `unwined-episode` sits directly above the `links-with-map` widget on the same URL, and
 supplies the page-level anchor targets its jump links point at.
 
+On vpm.org, the theme's `pjax.js` ignores `#` links and the header isn't sticky, so jump links
+need no scroll offset. See `~/Projects/research/vpm-theme-anchor-links.md`.
+
 ## Style Conventions
 
 - All class names namespaced with a page-specific prefix (e.g. `vpm-impact25-`, `vpm-vg26-`)
